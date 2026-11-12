@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurante O Farol</title>
+<link rel="icon" href="logo.jpg">
+<meta name="description" content="Restaurante O Farol: frutos do mar, porções e filés de peixe no Balneário Praia do Perequê, Guarujá - SP. Estrada Bertioga, 1946 - Km 7. WhatsApp (13) 99129-8527.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+<style>
+/* Paleta do cliente: azul-petróleo, verde-mar, areia, pêssego e coral. Fonte única: Righteous.
+   Layout: topo azul-petróleo, cardápio em "folhas" brancas sobre o azul-petróleo que vem da luz do farol,
+   com linhas pontilhadas e colunas de preço como no menu de mesa. Tema único, por escolha. */
+:root{
+  --petroleo:#264653;
+  --verde:#2A9D8F;
+  --areia:#E9C46A;
+  --pessego:#F4A261;
+  --coral:#E76F51;
+  --papel:#FFFFFF;
+  --tinta:#264653;
+  --tinta-suave:#557079;
+  --linha:#C9D7D9;
+  --display:"Righteous","Trebuchet MS",system-ui,sans-serif;
+  --body:"Righteous","Trebuchet MS",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;font-weight:400}
+html{font-synthesis:none}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--areia);color:var(--tinta);font-family:var(--body);font-size:17px;line-height:1.5}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* Barra superior */
+.topo{position:sticky;top:0;z-index:20;background:var(--petroleo);color:#fff;border-bottom:4px solid var(--coral)}
+.topo .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none}
+.marca img{width:40px;height:40px;border-radius:50%}
+.marca span{font-family:var(--display);font-size:19px;letter-spacing:.02em}
+.btn-zap{display:inline-flex;align-items:center;gap:8px;background:var(--coral);color:#fff;font-weight:700;text-decoration:none;padding:10px 16px;border-radius:999px;white-space:nowrap}
+.btn-zap:hover{background:var(--pessego);color:var(--petroleo)}
+.btn-zap svg{width:18px;height:18px}
+@media (max-width:720px){.marca span{font-size:16px}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:var(--petroleo);color:#fff;padding:56px 0 110px}
+.hero .wrap{position:relative;display:grid;justify-items:center;text-align:center;gap:22px}
+.selo{width:180px;height:180px;border-radius:50%;padding:12px;background:#EEA501;border:6px solid var(--areia)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,9vw,104px);line-height:.92;margin:0;letter-spacing:.01em;text-wrap:balance}
+.hero h1 small{display:block;font-family:var(--body);font-weight:500;font-size:clamp(15px,2vw,19px);letter-spacing:.32em;text-transform:uppercase;color:var(--areia);margin-bottom:10px}
+.hero p.lead{margin:0;max-width:34ch;font-size:clamp(18px,2.3vw,22px);color:#DCE8E6;text-wrap:balance}
+.acoes{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn-claro{display:inline-flex;align-items:center;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:999px;border:2px solid #fff;color:#fff}
+.btn-claro:hover{background:#fff;color:var(--petroleo)}
+.hero .btn-zap{padding:12px 20px}
+.ondas{position:absolute;left:0;right:0;bottom:-1px;height:60px;color:var(--areia)}
+.ondas svg{width:100%;height:100%;display:block}
+
+/* Faixa de informações */
+.faixa{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-40px;position:relative;z-index:2}
+.faixa a,.faixa div{background:var(--papel);border-radius:14px;padding:16px 18px;text-decoration:none;box-shadow:0 6px 0 var(--verde)}
+.faixa b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--tinta-suave);font-weight:700}
+.faixa span{font-size:18px;font-weight:700}
+
+@media (max-width:760px){.faixa{grid-template-columns:1fr}}
+
+/* Cardápio */
+section{padding:72px 0 0}
+.titulo-sec{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:0 0 20px}
+.titulo-sec h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:1;margin:0;color:var(--petroleo);text-wrap:balance}
+.titulo-sec p{margin:0;color:var(--tinta);font-weight:500}
+.chips{position:sticky;top:67px;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 0;background:var(--areia);scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;text-decoration:none;font-weight:700;font-size:15px;padding:8px 14px;border-radius:999px;border:2px solid var(--petroleo);color:var(--petroleo);background:transparent}
+.chips a:hover,.chips a.ativo{background:var(--petroleo);color:#fff}
+
+.folhas{display:grid;gap:22px;margin-top:10px}
+.folha{background:var(--papel);border-radius:18px;padding:28px clamp(18px,4vw,40px) 26px;box-shadow:0 8px 0 var(--petroleo)}
+.folha h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,3.4vw,32px);color:var(--coral);margin:0 0 4px;letter-spacing:.01em;text-transform:uppercase}
+.folha .nota-cat{margin:0 0 14px;color:var(--tinta-suave);font-size:15px}
+.cab{display:grid;grid-template-columns:1fr 124px 124px;gap:8px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--tinta-suave);border-bottom:2px solid var(--tinta);padding-bottom:6px;margin-top:8px}
+.cab span{text-align:right}
+.item{display:grid;grid-template-columns:1fr 124px 124px;gap:8px;align-items:baseline;padding:11px 0;border-bottom:1px dotted var(--linha)}
+.item:last-child{border-bottom:0}
+.nome{font-weight:700;font-size:18px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.nome em{font-style:normal;font-weight:500;font-size:13px;color:var(--tinta-suave)}
+.tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:var(--pessego);color:var(--petroleo);padding:2px 8px;border-radius:999px}
+.desc{grid-column:1/-1;margin:2px 0 0;color:var(--tinta-suave);font-size:15px;max-width:68ch}
+.preco{justify-self:end;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.preco.vazio{color:var(--linha)}
+.preco small{color:var(--tinta-suave);font-size:12px;margin-right:2px}
+button.preco{position:relative;font:inherit;font-size:16px;color:var(--petroleo);background:#F3F7F7;border:2px solid transparent;border-radius:10px;padding:6px 10px;cursor:pointer;transition:background .15s,border-color .15s,transform .1s}
+button.preco:hover{border-color:var(--verde);background:#E6F3F1}
+button.preco:active{transform:scale(.96)}
+button.preco::before{content:"+";color:var(--verde);margin-right:4px}
+.qtd-badge{position:absolute;top:-9px;right:-7px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--coral);color:#fff;font-size:12px;line-height:22px;text-align:center;display:none}
+.no-carrinho .qtd-badge{display:block}
+button.preco.no-carrinho{border-color:var(--coral);background:#FDF0EC}
+@keyframes pulo{50%{transform:scale(1.08)}}
+@keyframes puloBarra{50%{transform:translateX(-50%) scale(1.03)}}
+.barra-conta.pulou{animation:puloBarra .3s ease}
+.pulou{animation:pulo .25s ease}
+@media (prefers-reduced-motion:reduce){.pulou{animation:none}}
+.dica{display:inline-flex;align-items:center;gap:8px;background:var(--petroleo);color:#fff;padding:6px 14px;border-radius:999px;font-size:15px}
+.dica b{color:var(--areia)}
+
+/* Conta */
+.barra-conta{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:30;width:min(640px,calc(100% - 32px));display:flex;align-items:center;gap:14px;background:var(--petroleo);color:#fff;border:3px solid var(--coral);border-radius:18px;padding:10px 10px 10px 18px;box-shadow:0 10px 30px rgba(38,70,83,.35)}
+.barra-conta .resumo{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.barra-conta .resumo span{font-size:13px;color:#C6D8D9}
+.barra-conta .resumo b{font-size:20px;font-variant-numeric:tabular-nums}
+.barra-conta button{margin-left:auto;font:inherit;font-size:16px;background:var(--coral);color:#fff;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;white-space:nowrap}
+.barra-conta button:hover{background:var(--pessego);color:var(--petroleo)}
+.barra-conta.vazia{border-color:var(--verde)}
+.barra-conta.vazia button{background:#3A5E6C}
+body{padding-bottom:96px}
+
+.fundo-conta{position:fixed;inset:0;z-index:40;background:rgba(38,70,83,.55);opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s .4s}
+.fundo-conta.aberta{opacity:1;visibility:visible;transition:opacity .4s ease}
+.painel{position:fixed;z-index:41;top:0;right:0;height:100%;width:min(520px,100%);background:var(--papel);color:var(--tinta);display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),visibility 0s .35s}
+.painel.aberta{transform:none;visibility:visible;box-shadow:-10px 0 40px rgba(0,0,0,.25);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion:reduce){.painel{transition:none}}
+.painel-topo{display:flex;align-items:center;gap:12px;padding:18px 20px;background:var(--petroleo);color:#fff}
+.painel-topo h2{margin:0;font-size:28px;color:var(--areia)}
+.painel-topo button{margin-left:auto;font:inherit;background:transparent;color:#fff;border:2px solid #fff;border-radius:999px;padding:6px 14px;cursor:pointer}
+.painel-corpo{flex:1;overflow:auto;padding:10px 20px 20px}
+.tabela{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tabela th{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--tinta-suave);text-align:left;border-bottom:2px solid var(--tinta);padding:10px 6px 6px}
+.tabela th.num,.tabela td.num{text-align:right}
+.tabela th.meio,.tabela td.meio{text-align:center}
+.tabela td{border-bottom:1px dotted var(--linha);padding:10px 6px;vertical-align:middle}
+.tabela td .p-nome{display:block;font-size:16px}
+.tabela td .p-var{display:block;font-size:13px;color:var(--tinta-suave)}
+.qtd{display:inline-flex;align-items:center;gap:6px}
+.qtd button{font:inherit;width:30px;height:30px;border-radius:50%;border:2px solid var(--verde);background:#fff;color:var(--petroleo);cursor:pointer;line-height:1;font-size:18px}
+.qtd button:hover{background:var(--verde);color:#fff}
+.qtd output{min-width:22px;text-align:center;font-size:17px}
+.vazio-msg{padding:28px 6px;color:var(--tinta-suave);text-align:center}
+.totais{border-top:2px solid var(--tinta);padding:14px 20px 18px;display:grid;gap:8px;background:#F8FAFA}
+.linha-t{display:flex;justify-content:space-between;align-items:center;font-variant-numeric:tabular-nums;font-size:16px}
+.linha-t.total{font-size:24px;color:var(--petroleo);padding-top:6px;border-top:1px dotted var(--linha)}
+.linha-t label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.linha-t input{width:18px;height:18px;accent-color:var(--verde)}
+.acoes-conta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.acoes-conta a,.acoes-conta button{font:inherit;font-size:15px;text-decoration:none;border-radius:999px;padding:10px 16px;cursor:pointer;border:2px solid var(--verde);background:#fff;color:var(--petroleo)}
+.acoes-conta .principal{background:var(--coral);border-color:var(--coral);color:#fff}
+.acoes-conta .principal:hover{background:var(--pessego);border-color:var(--pessego);color:var(--petroleo)}
+.acoes-conta button:hover{background:var(--verde);color:#fff}
+.acoes-conta .limpar{border-color:transparent;color:var(--coral);margin-left:auto}
+.acoes-conta .limpar:hover{background:#FDF0EC;color:var(--coral)}
+.aviso-copia{font-size:14px;color:var(--verde);min-height:1em;margin:0}
+.obs-conta{font-size:13px;color:var(--tinta-suave);margin:0}
+@media (max-width:560px){
+  .cab{grid-template-columns:1fr 92px 100px;gap:6px}
+  .item{grid-template-columns:1fr 92px 100px;gap:6px}
+  button.preco{font-size:14px;padding:6px 7px}
+  button.preco small{display:none}
+  .nome{font-size:16px}
+}
+
+/* Especialidades: tamanhos */
+.especial{padding:16px 0;border-bottom:1px dotted var(--linha)}
+.especial:last-child{border-bottom:0}
+.especial .nome{font-size:20px}
+.tamanhos{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.tam{position:relative;font:inherit;text-align:left;cursor:pointer;background:transparent;color:inherit;transition:background .15s,transform .1s;display:flex;flex-direction:column;border:2px solid var(--verde);border-radius:12px;padding:8px 14px;min-width:132px}
+.tam span{font-size:13px;color:var(--tinta-suave);font-weight:500}
+.tam b{font-variant-numeric:tabular-nums;font-size:19px;color:var(--petroleo)}
+.destaque{background:var(--petroleo);color:#fff;box-shadow:0 8px 0 var(--coral)}
+.destaque h3{color:var(--areia)}
+.destaque .nota-cat,.destaque .desc,.destaque .tam span{color:#C6D8D9}
+.destaque .especial{border-color:rgba(255,255,255,.25)}
+.destaque .tam{border-color:var(--pessego)}
+.destaque .tam:hover{background:rgba(244,162,97,.18)}
+.tam:active{transform:scale(.97)}
+.tam b::before{content:"+ ";color:var(--pessego)}
+.tam.no-carrinho{border-color:var(--coral);background:rgba(231,111,81,.22)}
+.destaque .tam b{color:#fff}
+
+.rodape-menu{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-weight:500;font-size:15px}
+.rodape-menu span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--coral);margin-right:8px;vertical-align:middle}
+
+/* Localização */
+.local{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
+@media (max-width:820px){.local{grid-template-columns:1fr}}
+.cartao{background:var(--papel);border-radius:18px;padding:28px;box-shadow:0 8px 0 var(--petroleo)}
+.cartao h3{font-family:var(--display);font-weight:400;font-size:26px;margin:0 0 10px;color:var(--coral)}
+.cartao address{font-style:normal;font-size:20px;line-height:1.45;font-weight:500}
+.cartao .acoes{justify-content:flex-start;margin-top:20px}
+.btn-azul{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:999px;background:var(--verde);color:#fff}
+.btn-azul:hover{background:var(--petroleo)}
+.btn-linha{display:inline-flex;align-items:center;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:999px;border:2px solid var(--verde);color:var(--petroleo)}
+.btn-linha:hover{background:var(--verde);color:#fff}
+.mapa{position:relative;border-radius:18px;overflow:hidden;background:var(--petroleo);min-height:300px;box-shadow:0 8px 0 var(--verde)}
+.mapa svg{position:absolute;inset:0;width:100%;height:100%}
+.placa{position:absolute;right:18px;top:18px;background:var(--verde);color:#fff;border:3px solid #fff;border-radius:8px;padding:6px 12px;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.placa b{display:block;font-family:var(--display);font-weight:400;font-size:30px;line-height:1}
+.placa span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+
+/* Contato */
+.contato{background:var(--petroleo);color:#fff;border-radius:22px;padding:clamp(28px,5vw,48px);display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.contato img{width:120px;height:120px;border-radius:50%;padding:8px;background:#EEA501;border:5px solid var(--areia)}
+.contato h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,5vw,46px);margin:0 0 6px;color:var(--areia);line-height:1.05}
+.contato .fone{font-size:clamp(26px,4.5vw,40px);font-weight:700;font-variant-numeric:tabular-nums;margin:0 0 16px;letter-spacing:.01em}
+.contato .acoes{justify-content:flex-start}
+@media (max-width:600px){.contato{grid-template-columns:1fr;text-align:left}.contato img{width:90px;height:90px}}
+
+footer{padding:48px 0 40px;font-size:14px;color:var(--petroleo)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+/* ===== Movimento: lento, natural, discreto ===== */
+:root{--ease-brisa:cubic-bezier(.45,.05,.55,.95);--ease-saida:cubic-bezier(.16,1,.3,1)}
+.hero,.contato,#cardapio{position:relative}
+.hero-conteudo{z-index:1;will-change:transform}
+.decor-camada{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+#cardapio > .wrap{position:relative;z-index:1}
+.contato{overflow:hidden}
+.contato > *:not(.palma){position:relative;z-index:1}
+
+/* Folhas de palmeira decorativas */
+.palma{position:absolute;pointer-events:none;will-change:transform}
+.palma svg{display:block;width:100%;height:100%}
+.balanco{width:100%;height:100%;transform-origin:8% 92%}
+.p-hero-1{left:-70px;top:30px;width:340px;height:340px;color:var(--verde);opacity:.26}
+.p-hero-1 .balanco{transform:rotate(8deg)}
+.p-hero-2{right:-90px;bottom:10px;width:420px;height:420px;color:var(--verde);opacity:.2}
+.p-hero-2 .balanco{transform:scaleX(-1) rotate(4deg)}
+.p-menu-1{left:-150px;top:240px;width:520px;height:520px;color:var(--petroleo);opacity:.07}
+.p-menu-1 .balanco{transform:rotate(18deg)}
+.p-menu-2{right:-170px;bottom:180px;width:560px;height:560px;color:var(--verde);opacity:.10}
+.p-menu-2 .balanco{transform:scaleX(-1) rotate(10deg)}
+.p-contato{right:-60px;bottom:-110px;width:330px;height:330px;color:var(--verde);opacity:.28}
+.p-contato .balanco{transform:scaleX(-1) rotate(-6deg)}
+@media (max-width:720px){
+  .p-hero-1{width:230px;height:230px;left:-80px;top:10px}
+  .p-hero-2{width:260px;height:260px;right:-100px}
+  .p-menu-1,.p-menu-2{width:340px;height:340px}
+  .p-contato{width:220px;height:220px}
+}
+
+/* Ondas do hero em duas camadas */
+.ondas{overflow:hidden}
+.ondas .onda{position:absolute;left:0;bottom:0;width:200%;height:100%}
+.onda-fundo{color:var(--verde);transform:translateY(-9px)}
+@media (max-width:720px){.ondas{height:40px}}
+
+/* Mapa */
+.mapa-arte{transform:scale(1.08);transform-origin:50% 50%}
+.linha-mar,.pino{transform-box:fill-box;transform-origin:50% 100%}
+
+/* Microinterações: botões e cartões */
+.btn-zap,.btn-claro,.btn-azul,.btn-linha,.chips a,.acoes-conta a,.acoes-conta button,.barra-conta button,.painel-topo button,.qtd button{
+  transition:transform .45s var(--ease-saida),background-color .3s ease,color .3s ease,border-color .3s ease,box-shadow .45s var(--ease-saida)}
+.btn-zap:hover,.btn-azul:hover,.acoes-conta .principal:hover,.barra-conta button:hover{transform:translateY(-2px);box-shadow:0 10px 22px -10px rgba(38,70,83,.7)}
+.btn-claro:hover,.btn-linha:hover,.chips a:hover,.acoes-conta button:hover{transform:translateY(-2px)}
+.btn-zap:active,.btn-claro:active,.btn-azul:active,.btn-linha:active,.chips a:active,.acoes-conta a:active,.acoes-conta button:active,.barra-conta button:active{transform:translateY(0) scale(.98);transition-duration:.12s}
+.btn-zap svg{transition:transform .6s var(--ease-saida)}
+.btn-zap:hover svg{transform:rotate(-12deg) scale(1.08)}
+.qtd button:hover{transform:scale(1.08)}
+.faixa a,.faixa div,.cartao,.mapa,.tam{transition:transform .6s var(--ease-saida),box-shadow .6s var(--ease-saida),background-color .3s ease,border-color .3s ease}
+.faixa a:hover,.cartao:hover{transform:translateY(-4px);box-shadow:0 10px 0 var(--verde)}
+.cartao:hover{box-shadow:0 12px 0 var(--petroleo)}
+.mapa:hover{transform:translateY(-4px);box-shadow:0 12px 0 var(--verde)}
+.tam:hover{transform:translateY(-2px)}
+.mapa .mapa-arte{transition:none}
+.item{transition:background-color .35s ease}
+.item:hover{background:linear-gradient(90deg,rgba(42,157,143,0),rgba(42,157,143,.05) 20%,rgba(42,157,143,.05) 80%,rgba(42,157,143,0))}
+.folha h3{transition:letter-spacing .8s var(--ease-saida)}
+.folha:hover h3{letter-spacing:.03em}
+
+@media (prefers-reduced-motion:no-preference){
+  /* Brisa: durações diferentes e longas para não parecer um loop */
+  .b1{animation:brisa1 13s var(--ease-brisa) infinite alternate}
+  .b2{animation:brisa2 17s var(--ease-brisa) -4s infinite alternate}
+  .b3{animation:brisa3 21s var(--ease-brisa) -9s infinite alternate}
+  .p-hero-1 .b1{--r:8deg}.p-contato .b1{--r:-6deg;--sx:-1}
+  .p-hero-2 .b2{--r:4deg;--sx:-1}.p-menu-2 .b2{--r:10deg;--sx:-1}
+  .p-menu-1 .b3{--r:18deg}
+
+  /* Entrada do hero */
+  .hero-conteudo > *{animation:sobe 1.3s var(--ease-saida) both}
+  .hero-conteudo > :nth-child(1){animation:sobe 1.3s var(--ease-saida) .1s both,flutua 9s var(--ease-brisa) 1.6s infinite alternate}
+  .hero-conteudo > :nth-child(2){animation-delay:.28s}
+  .hero-conteudo > :nth-child(3){animation-delay:.44s}
+  .hero-conteudo > :nth-child(4){animation-delay:.6s}
+  .palma{animation:surge 2.4s var(--ease-saida) .2s both}
+  .faixa > *{animation:sobe 1.1s var(--ease-saida) both}
+  .faixa > :nth-child(1){animation-delay:.75s}
+  .faixa > :nth-child(2){animation-delay:.87s}
+  .faixa > :nth-child(3){animation-delay:.99s}
+  .barra-conta:not(.entrou):not(.vazia){animation:entraBarra 1s var(--ease-saida) 1.3s both}
+  .barra-conta.pulou{animation:puloBarra .3s ease}
+
+  /* Ondas e mar do mapa à deriva, bem devagar */
+  .onda-frente{animation:deriva 70s linear infinite}
+  .onda-fundo{animation:derivaFundo 110s linear infinite reverse}
+  .lm1{animation:mare 11s var(--ease-brisa) infinite alternate}
+  .lm2{animation:mare 15s var(--ease-brisa) -5s infinite alternate-reverse}
+  .pino{animation:boia 5.5s var(--ease-brisa) infinite alternate}
+
+  /* Revelar ao rolar */
+  .revelar{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease-saida),transform 1.1s var(--ease-saida);transition-delay:var(--atraso,0s)}
+  .revelar.visivel{opacity:1;transform:none}
+  .revelar-suave{opacity:0;transform:translateY(12px);transition:opacity .9s var(--ease-saida),transform .9s var(--ease-saida);transition-delay:var(--atraso,0s)}
+  .revelar-suave.visivel{opacity:1;transform:none}
+  .titulo-sec.revelar h2{clip-path:inset(0 100% 0 0);transition:clip-path 1.4s var(--ease-saida) .1s}
+  .titulo-sec.revelar.visivel h2{clip-path:inset(0 0 0 0)}
+}
+@keyframes sobe{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes surge{from{opacity:0}}
+@keyframes flutua{from{transform:translateY(0) rotate(0)}to{transform:translateY(-7px) rotate(-1.2deg)}}
+@keyframes brisa1{0%{transform:scaleX(var(--sx,1)) rotate(var(--r,0deg))}45%{transform:scaleX(var(--sx,1)) rotate(calc(var(--r,0deg) + 2.4deg))}100%{transform:scaleX(var(--sx,1)) rotate(calc(var(--r,0deg) - 1.2deg))}}
+@keyframes brisa2{0%{transform:scaleX(var(--sx,1)) rotate(calc(var(--r,0deg) - 1.5deg))}60%{transform:scaleX(var(--sx,1)) rotate(calc(var(--r,0deg) + 2deg))}100%{transform:scaleX(var(--sx,1)) rotate(var(--r,0deg))}}
+@keyframes brisa3{0%{transform:scaleX(var(--sx,1)) rotate(var(--r,0deg))}35%{transform:scaleX(var(--sx,1)) rotate(calc(var(--r,0deg) - 2deg))}100%{transform:scaleX(var(--sx,1)) rotate(calc(var(--r,0deg) + 1.6deg))}}
+@keyframes deriva{to{transform:translateX(-50%)}}
+@keyframes derivaFundo{from{transform:translate(0,-9px)}to{transform:translate(-50%,-9px)}}
+@keyframes mare{from{transform:translateX(-10px)}to{transform:translateX(10px)}}
+@keyframes boia{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+@keyframes entraBarra{from{opacity:0;transform:translate(-50%,40px)}to{opacity:1;transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .item:hover{background:none}
+  .btn-zap:hover,.btn-azul:hover,.btn-claro:hover,.btn-linha:hover,.chips a:hover,.faixa a:hover,.cartao:hover,.mapa:hover,.tam:hover,.qtd button:hover,.acoes-conta a:hover,.acoes-conta button:hover,.barra-conta button:hover{transform:none}
+  .btn-zap:hover svg{transform:none}
+}
+
+/* ===================== Estrutura e funcionalidades ===================== */
+:root{--topo-h:68px}
+html{scroll-padding-top:calc(var(--topo-h) + 12px)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.pular{position:absolute;left:12px;top:-60px;z-index:60;background:var(--coral);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;transition:top .2s}
+.pular:focus{top:12px}
+button{font-family:inherit}
+input,textarea{font-family:inherit;font-size:16px}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+/* Cabeçalho */
+.topo{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.topo .wrap{gap:12px}
+.nav-principal{display:flex;gap:2px;margin-left:auto}
+.nav-principal a{text-decoration:none;padding:8px 12px;border-radius:999px;transition:background-color .3s ease,color .3s ease}
+.nav-principal a:hover{background:rgba(255,255,255,.12)}
+.nav-principal a[aria-current="true"]{background:rgba(233,196,106,.16);color:var(--areia)}
+.topo-acoes{display:flex;align-items:center;gap:8px}
+.btn-pedido{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border-radius:999px;border:2px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:16px;cursor:pointer;transition:border-color .3s ease,background-color .3s ease,transform .45s var(--ease-saida)}
+.btn-pedido svg{width:20px;height:20px}
+.btn-pedido:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-pedido .contador{min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:rgba(255,255,255,.18);font-size:13px;line-height:22px;text-align:center;font-variant-numeric:tabular-nums}
+.btn-pedido.tem{border-color:var(--coral)}
+.btn-pedido.tem .contador{background:var(--coral);color:#fff}
+.btn-menu{display:none;width:44px;height:44px;border-radius:12px;border:2px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer;align-items:center;justify-content:center}
+.btn-menu svg{width:22px;height:22px}
+.btn-menu path{stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .35s var(--ease-saida),opacity .2s;transform-origin:12px 12px}
+.btn-menu[aria-expanded="true"] .l1{transform:translateY(5px) rotate(45deg)}
+.btn-menu[aria-expanded="true"] .l2{opacity:0}
+.btn-menu[aria-expanded="true"] .l3{transform:translateY(-5px) rotate(-45deg)}
+.menu-mobile{background:var(--petroleo);border-top:1px solid rgba(255,255,255,.12)}
+.menu-mobile .wrap{display:grid;gap:4px;padding-top:10px;padding-bottom:16px}
+.menu-mobile a{display:flex;align-items:center;min-height:48px;padding:0 12px;border-radius:12px;text-decoration:none;font-size:18px}
+.menu-mobile a:hover,.menu-mobile a[aria-current="true"]{background:rgba(255,255,255,.08);color:var(--areia)}
+.menu-mobile .btn-zap{justify-content:center;margin-top:8px;font-size:16px;color:#fff}
+@media (max-width:1080px){
+  .nav-principal,.btn-zap-topo{display:none}
+  .topo-acoes{margin-left:auto}
+  .btn-menu{display:inline-flex}
+}
+@media (min-width:1081px){.menu-mobile{display:none!important}}
+@media (max-width:420px){.btn-pedido-txt{display:none}.btn-pedido{padding:8px 12px}}
+
+/* Apresentação */
+.hero-local{display:inline-flex;align-items:center;gap:8px;color:var(--areia);text-decoration:none;font-size:16px;padding:6px 12px;border-radius:999px;border:1px solid rgba(233,196,106,.35);transition:background-color .3s ease,border-color .3s ease}
+.hero-local svg{width:18px;height:18px;flex:none}
+.hero-local:hover{background:rgba(233,196,106,.12);border-color:var(--areia)}
+
+/* Cena do farol */
+.cena{position:relative;height:100vh;height:100svh;padding:0;margin-top:56px;background:linear-gradient(#132B51,#0D2344);overflow:hidden}
+.cena-palco{position:absolute;inset:0}
+.cena-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:transparent}
+@media (max-aspect-ratio:3/2){
+  .cena-video{-webkit-mask-image:linear-gradient(transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(transparent,#000 6%,#000 94%,transparent)}
+}
+.cena-branco{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.cena-petroleo{position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(120% 70% at 50% 100%,#2E5361 0%,var(--petroleo) 60%)}
+.cena-dica{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;color:#E8EEF2;font-size:14px;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.cena-dica svg{width:22px;height:22px}
+@media (prefers-reduced-motion:no-preference){.cena-dica svg{animation:boia 2.6s var(--ease-brisa) infinite alternate}}
+html.cena-ativa:not(.cena-subindo) .topo:not(:focus-within){transform:translateY(-100%)}
+html.cena-ativa .barra-conta{opacity:0;visibility:hidden}
+/* Versão simplificada (movimento reduzido ou sem GSAP) */
+.cena.cena-simples{height:auto;background:#0D2344;padding:32px 0 0}
+.cena-simples .cena-palco{position:relative;inset:auto;max-width:960px;margin:0 auto;padding:0 16px}
+.cena-simples .cena-video{position:relative;height:auto;aspect-ratio:864/480;border-radius:12px;-webkit-mask-image:none;mask-image:none}
+.cena-simples .cena-branco,.cena-simples .cena-petroleo,.cena-simples .cena-dica{display:none}
+.cena-simples::after{content:"";display:block;height:140px;background:linear-gradient(#0D2344,var(--petroleo))}
+
+/* Cardápio sobre o azul-petróleo, continuação da luz do farol */
+#cardapio{background:var(--petroleo);color:#fff;padding:64px 0 120px;position:relative;z-index:2}
+.cena{z-index:1}
+/* Com a cena ativa, o cardápio sobe por cima do fim da transição, já no mesmo azul-petróleo */
+html.cena-gsap #cardapio{margin-top:-50vh;margin-top:-50svh;padding-top:120px;background:linear-gradient(rgba(38,70,83,0),var(--petroleo) 160px)}
+#cardapio .titulo-sec h2{color:var(--areia)}
+#cardapio .titulo-sec p{color:#D5E2E2}
+.p-menu-1{color:var(--verde);opacity:.10}
+.ondas-saida{color:var(--areia)}
+.ferramentas{position:sticky;top:var(--topo-h);z-index:10;display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:12px;align-items:center;padding:12px 0;background:var(--petroleo);transition:top .5s cubic-bezier(.16,1,.3,1)}
+html.cena-ativa:not(.cena-subindo) .ferramentas{top:0}
+.busca{position:relative;display:flex;align-items:center}
+.busca svg{position:absolute;left:14px;width:20px;height:20px;color:var(--tinta-suave);pointer-events:none}
+.busca input{width:100%;height:46px;border-radius:999px;border:2px solid transparent;background:#fff;color:var(--petroleo);padding:0 44px 0 42px;outline:none;transition:border-color .3s ease,box-shadow .3s ease}
+.busca input::placeholder{color:#7A8F96}
+.busca input:focus{border-color:var(--areia);box-shadow:0 0 0 4px rgba(233,196,106,.25)}
+.busca input::-webkit-search-cancel-button{display:none}
+.limpar-busca{position:absolute;right:4px;width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:var(--petroleo);font-size:24px;line-height:1;cursor:pointer}
+.limpar-busca:hover{background:#EEF3F3}
+.chips{position:static;top:auto;padding:0;background:transparent;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.chips button{flex:none;scroll-snap-align:start;min-height:42px;padding:8px 16px;border-radius:999px;border:2px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:15px;cursor:pointer;transition:transform .45s var(--ease-saida),background-color .3s ease,color .3s ease,border-color .3s ease}
+.chips button:hover{border-color:#fff;transform:translateY(-2px)}
+.chips button[aria-pressed="true"]{background:var(--areia);border-color:var(--areia);color:var(--petroleo)}
+.chips button .n{font-size:12px;opacity:.7;margin-left:6px;font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .ferramentas{grid-template-columns:1fr;gap:10px;padding:10px 0}
+  .busca input{height:44px}
+}
+.resultado{margin:6px 0 0;min-height:1.5em;color:#D5E2E2;font-size:15px}
+.sem-resultado{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.3);border-radius:18px;padding:28px;text-align:center;margin-top:10px}
+.sem-resultado p{margin:0 0 14px;font-size:18px}
+.sem-resultado .btn-linha{border-color:var(--areia);color:#fff;background:transparent;cursor:pointer;font-size:16px}
+.sem-resultado .btn-linha:hover{background:var(--areia);color:var(--petroleo)}
+#cardapio .rodape-menu{color:#D5E2E2}
+.folha{box-shadow:0 8px 0 rgba(0,0,0,.18);color:var(--tinta)}
+.destaque{color:#fff;background:#2E5361;box-shadow:0 8px 0 var(--coral);border:1px solid rgba(255,255,255,.08)}
+[hidden]{display:none!important}
+
+/* Linhas do cardápio com controles de quantidade */
+.item{grid-template-columns:1fr 140px 140px;grid-template-areas:"nome o1 o2" "desc desc desc";align-items:center}
+.cab{grid-template-columns:1fr 140px 140px}
+.item > .nome{grid-area:nome}
+.item > .o1{grid-area:o1}
+.item > .o2{grid-area:o2}
+.item > .desc{grid-area:desc}
+.opcao{justify-self:end;display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:0}
+.op-rotulo{display:none;font-size:13px;color:var(--tinta-suave)}
+.op-add{position:relative;min-height:42px;font:inherit;font-size:16px;color:var(--petroleo);background:#F3F7F7;border:2px solid transparent;border-radius:12px;padding:6px 12px;cursor:pointer;white-space:nowrap;font-variant-numeric:tabular-nums;transition:background-color .3s ease,border-color .3s ease,transform .45s var(--ease-saida)}
+.op-add::before{content:"+";color:var(--verde);margin-right:6px}
+.op-add small{color:var(--tinta-suave);font-size:12px;margin-right:2px}
+.op-add:hover{border-color:var(--verde);background:#E6F3F1;transform:translateY(-2px)}
+.op-add:active{transform:scale(.97)}
+.op-qtd{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.op-preco{font-size:13px;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.stepper{display:inline-flex;align-items:center;border:2px solid var(--coral);border-radius:999px;background:#FDF0EC;padding:2px}
+.stepper button{width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:var(--petroleo);font-size:20px;line-height:1;cursor:pointer;transition:background-color .25s ease,transform .3s var(--ease-saida)}
+.stepper button:hover{background:#fff}
+.stepper button:active{transform:scale(.9)}
+.stepper output{min-width:28px;text-align:center;font-size:17px;font-variant-numeric:tabular-nums;color:var(--petroleo)}
+.opcao.tem .op-add{display:none}
+.opcao:not(.tem) .op-qtd{display:none}
+.opcao.vazio{color:var(--linha);align-self:center}
+@media (max-width:640px){
+  .cab{display:none}
+  .item{grid-template-columns:1fr 1fr;grid-template-areas:"nome nome" "desc desc" "o1 o2";gap:8px 10px;padding:14px 0}
+  .item > .desc{margin-bottom:2px}
+  .opcao{justify-self:stretch;align-items:stretch;background:#F6F9F9;border-radius:14px;padding:8px}
+  .opcao.vazio{display:none}
+  .op-rotulo{display:block}
+  .op-add{width:100%;min-height:44px;justify-content:center;background:#fff;border-color:#DCE6E7}
+  .op-qtd{align-items:stretch}
+  .op-preco{display:none}
+  .stepper{justify-content:space-between;width:100%}
+  .stepper button{width:44px;height:40px}
+}
+
+/* Especialidades: cartões por número de pessoas */
+.tamanhos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.op-card{justify-self:stretch;align-items:stretch;border:2px solid var(--pessego);border-radius:14px;padding:10px 12px;gap:8px;transition:border-color .3s ease,background-color .3s ease,transform .6s var(--ease-saida)}
+.op-card:hover{transform:translateY(-2px)}
+.op-card.tem{border-color:var(--coral);background:rgba(231,111,81,.16)}
+.op-card .op-rotulo{display:block;color:#C6D8D9}
+.op-card .op-valor{font-size:20px;font-variant-numeric:tabular-nums;color:#fff}
+.op-card .op-add{width:100%;background:rgba(255,255,255,.1);color:#fff;border-color:transparent}
+.op-card .op-add::before{color:var(--pessego)}
+.op-card .op-add:hover{background:rgba(255,255,255,.18);border-color:var(--pessego)}
+.op-card .op-qtd{align-items:stretch}
+.op-card .op-preco{display:none}
+.op-card .stepper{justify-content:space-between;background:#fff}
+
+/* Barra do pedido: só aparece quando há itens */
+.barra-conta{transition:opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1),visibility 0s}
+.barra-conta.vazia{opacity:0;visibility:hidden;transform:translate(-50%,24px);pointer-events:none;transition:opacity .3s ease,transform .4s ease,visibility 0s .4s}
+body{padding-bottom:0}
+.barra-conta .resumo span{font-size:14px}
+
+/* Painel do pedido */
+.painel-topo .passo{margin:2px 0 0;font-size:13px;color:#C6D8D9;letter-spacing:.04em}
+.painel-topo button{min-height:40px}
+.vazio-msg p{margin:0 0 8px}
+.vazio-msg .btn-linha{margin-top:10px;background:#fff;cursor:pointer;font-size:16px}
+.tabela .remover{width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--coral);font-size:20px;cursor:pointer;line-height:1}
+.tabela .remover:hover{background:#FDF0EC}
+.tabela td.acao{width:40px;text-align:right;padding-right:0}
+.qtd button{width:34px;height:34px}
+.rev-titulo{font-size:20px;color:var(--coral);margin:12px 0 8px}
+.rev-lista{list-style:none;margin:0 0 18px;padding:0}
+.rev-lista li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:baseline;padding:10px 0;border-bottom:1px dotted var(--linha);font-variant-numeric:tabular-nums}
+.rev-lista .q{color:var(--coral);font-size:17px}
+.rev-lista .n{font-size:16px}
+.rev-lista .n small{display:block;font-size:13px;color:var(--tinta-suave)}
+.rev-lista .v{text-align:right}
+.campos{display:grid;gap:6px;margin-bottom:14px}
+.campos label{font-size:15px;color:var(--petroleo);margin-top:6px}
+.campos label span{color:var(--tinta-suave);font-size:13px}
+.campos input,.campos textarea{width:100%;border:2px solid var(--linha);border-radius:12px;padding:10px 12px;color:var(--petroleo);background:#fff;outline:none;resize:vertical;transition:border-color .3s ease}
+.campos input:focus,.campos textarea:focus{border-color:var(--verde)}
+.acoes-conta a,.acoes-conta button{min-height:44px;display:inline-flex;align-items:center}
+.acoes-conta .limpar.confirmar{background:var(--coral);color:#fff}
+@media (max-width:520px){
+  .acoes-conta .principal{width:100%;justify-content:center}
+  .acoes-conta .limpar{margin-left:0}
+}
+
+/* Localização */
+.referencia{margin:12px 0 0;color:var(--tinta-suave);font-size:16px}
+.referencia b{color:var(--petroleo)}
+.btn-texto{min-height:44px;border:0;background:transparent;color:var(--petroleo);text-decoration:underline;text-underline-offset:4px;cursor:pointer;font-size:16px;padding:0 8px}
+.btn-texto:hover{color:var(--coral)}
+.acoes a,.acoes button{min-height:44px}
+
+/* Sobre */
+.sobre-grade{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:760px){.sobre-grade{grid-template-columns:1fr}}
+.sobre-bloco{background:var(--papel);border-radius:18px;padding:24px 26px;box-shadow:0 8px 0 var(--verde)}
+.sobre-bloco h3{margin:0 0 10px;font-size:24px;color:var(--coral)}
+.sobre-bloco p{margin:0;max-width:60ch}
+.lista-fatos{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.lista-fatos li{position:relative;padding-left:20px}
+.lista-fatos li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--verde)}
+.sobre-bloco.pendente{background:rgba(255,255,255,.5);box-shadow:none;border:2px dashed rgba(38,70,83,.25)}
+.sobre-bloco.pendente p{color:var(--tinta-suave)}
+
+/* Contato */
+.infos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media (max-width:820px){.infos{grid-template-columns:1fr}}
+.info-item{background:var(--papel);border-radius:18px;padding:22px 24px;box-shadow:0 6px 0 var(--petroleo)}
+.info-item h3{margin:0 0 8px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave)}
+.info-dado{margin:0 0 10px;font-size:19px;color:var(--petroleo)}
+.info-acoes{margin:0}
+.info-acoes a{display:inline-flex;align-items:center;min-height:40px;color:var(--coral);text-underline-offset:4px}
+.contato .acoes a{min-height:46px}
+
+/* Rodapé */
+.rodape{margin-top:72px;background:var(--petroleo);color:#DCE8E6;padding:48px 0 28px;font-size:15px}
+.rodape .wrap{display:block}
+.rodape-grade{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:28px}
+@media (max-width:860px){.rodape-grade{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.rodape-grade{grid-template-columns:1fr}}
+.rodape h2{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--areia);margin:0 0 10px}
+.rodape-nome{font-size:22px;color:#fff;margin:0 0 8px}
+.rodape p{margin:0 0 8px}
+.rodape ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.rodape a{display:inline-flex;align-items:center;min-height:36px;color:#fff;text-decoration:none}
+.rodape a:hover{color:var(--areia);text-decoration:underline;text-underline-offset:4px}
+.direitos{border-top:1px solid rgba(255,255,255,.15);margin-top:28px!important;padding-top:18px;font-size:14px;color:#AFC4C6}
+body.tem-pedido .rodape{padding-bottom:110px}
+@media (prefers-reduced-motion:no-preference){
+  .hero-conteudo > :nth-child(5){animation-delay:.76s}
+}
+@media (prefers-reduced-motion:reduce){
+  .op-add:hover,.op-card:hover,.chips button:hover{transform:none}
+  .topo,.ferramentas,.barra-conta{transition:none}
+}
+
+.marca span{white-space:nowrap}
+
+/* No computador o resumo fica no cabeçalho, para a barra não cobrir o conteúdo */
+.total-topo{font-variant-numeric:tabular-nums;color:var(--areia)}
+@media (min-width:1081px){
+  .barra-conta{display:none}
+  body.tem-pedido .rodape{padding-bottom:28px}
+}
+@media (max-width:1080px){.total-topo{display:none!important}}
+@keyframes puloTopo{50%{transform:scale(1.06)}}
+.btn-pedido.pulou{animation:puloTopo .3s ease}
+@media (prefers-reduced-motion:reduce){.btn-pedido.pulou{animation:none}}
+
+.rodape .rodape-sub{margin-top:18px}
+</style>
+</head>
+<body>
+<a class="pular" href="#cardapio">Pular para o cardápio</a>
+
+<header class="topo" id="topo">
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="logo.jpg" alt=""><span>O FAROL</span></a>
+    <nav class="nav-principal" aria-label="Seções do site">
+      <a href="#inicio" data-sec="inicio">Início</a>
+      <a href="#cardapio" data-sec="cardapio">Cardápio</a>
+      <a href="#localizacao" data-sec="localizacao">Localização</a>
+      <a href="#sobre" data-sec="sobre">Sobre</a>
+      <a href="#contato" data-sec="contato">Contato</a>
+    </nav>
+    <div class="topo-acoes">
+      <button type="button" class="btn-pedido" id="btnPedido" aria-controls="painelConta" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 8h14l-1.2 12H6.2L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="btn-pedido-txt">Pedido</span>
+        <span class="contador" id="contadorTopo" aria-hidden="true">0</span>
+        <span class="total-topo" id="totalTopo" aria-hidden="true" hidden></span>
+        <span class="sr-only" id="contadorTopoSr">, vazio</span>
+      </button>
+      <a class="btn-zap btn-zap-topo" href="https://wa.me/5513991298527" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3Z"/></svg>
+        WhatsApp
+      </a>
+      <button type="button" class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="menuMobile">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+    </div>
+  </div>
+  <nav class="menu-mobile" id="menuMobile" aria-label="Menu" hidden>
+    <div class="wrap">
+      <a href="#inicio" data-sec="inicio">Início</a>
+      <a href="#cardapio" data-sec="cardapio">Cardápio</a>
+      <a href="#localizacao" data-sec="localizacao">Localização</a>
+      <a href="#sobre" data-sec="sobre">Sobre o restaurante</a>
+      <a href="#contato" data-sec="contato">Contato</a>
+      <a class="btn-zap" href="https://wa.me/5513991298527" target="_blank" rel="noopener">Chamar no WhatsApp · (13) 99129-8527</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="hero" id="inicio">
+    <div class="palma p-hero-1" data-par="-0.10" aria-hidden="true"><div class="balanco b1"></div></div>
+    <div class="palma p-hero-2" data-par="0.08" aria-hidden="true"><div class="balanco b2"></div></div>
+    <div class="wrap hero-conteudo">
+      <img class="selo" src="logo.jpg" alt="Logo do Restaurante O Farol">
+      <h1><small>Restaurante</small>O Farol</h1>
+      <p class="lead">Frutos do mar, porções e filés de peixe no Balneário Praia do Perequê, em Guarujá.</p>
+      <a class="hero-local" href="#localizacao">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+        Estrada Bertioga, 1946 – Km 7 · Guarujá – SP
+      </a>
+      <div class="acoes">
+        <a class="btn-zap" href="#cardapio">Ver o cardápio</a>
+        <a class="btn-claro" href="https://wa.me/5513991298527" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      </div>
+    </div>
+    <div class="ondas" aria-hidden="true">
+      <svg class="onda onda-fundo" viewBox="0 0 2880 60" preserveAspectRatio="none"><path fill="currentColor" d="M0 34c60-18 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0V60H0Z"/></svg>
+      <svg class="onda onda-frente" viewBox="0 0 2880 60" preserveAspectRatio="none"><path fill="currentColor" d="M0 34c60-18 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0V60H0Z"/></svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="faixa">
+      <a href="https://wa.me/5513991298527" target="_blank" rel="noopener"><b>WhatsApp e telefone</b><span>(13) 99129-8527</span></a>
+      <a href="#localizacao"><b>Onde estamos</b><span>Estrada Bertioga, 1946 · Km 7</span></a>
+      <div><b>Bairro</b><span>Praia do Perequê · Guarujá</span></div>
+    </div>
+  </div>
+
+  <section class="cena" id="cena" aria-label="Vídeo do farol. Role a página para acompanhar a luz.">
+    <div class="cena-palco">
+      <video class="cena-video" id="cenaVideo" muted playsinline preload="auto" disablepictureinpicture aria-label="Farol à noite girando o feixe de luz em direção à câmera"></video>
+      <div class="cena-branco" aria-hidden="true"></div>
+      <div class="cena-petroleo" aria-hidden="true"></div>
+      <p class="cena-dica" aria-hidden="true"><span>Role para seguir a luz</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></p>
+    </div>
+  </section>
+
+  <section id="cardapio" aria-labelledby="tituloCardapio">
+    <div class="decor-camada" aria-hidden="true">
+      <div class="palma p-menu-1" data-par="0.12"><div class="balanco b3"></div></div>
+      <div class="palma p-menu-2" data-par="-0.08"><div class="balanco b2"></div></div>
+    </div>
+    <div class="wrap">
+      <div class="titulo-sec">
+        <h2 id="tituloCardapio">Cardápio</h2>
+        <p>Preços em reais. Na ½ porção é cobrado 60% do valor da inteira.</p>
+      </div>
+      <div class="ferramentas" id="ferramentas">
+        <div class="busca">
+          <label class="sr-only" for="busca">Buscar prato no cardápio</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="busca" type="search" placeholder="Buscar prato (ex.: camarão)" autocomplete="off" enterkeyhint="search">
+          <button type="button" class="limpar-busca" id="limparBusca" hidden><span aria-hidden="true">×</span><span class="sr-only">Limpar busca</span></button>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria"></div>
+      </div>
+      <p class="resultado" id="resultado" aria-live="polite"></p>
+      <div class="folhas" id="folhas"></div>
+      <div class="sem-resultado" id="semResultado" hidden>
+        <p>Nenhum prato encontrado<span id="semResultadoTermo"></span>.</p>
+        <button type="button" class="btn-linha" id="limparFiltros">Ver o cardápio completo</button>
+      </div>
+      <div class="rodape-menu">
+        <span>Todos os filés podem ser grelhados ou empanados</span>
+        <span>Itens "sob consulta" dependem da disponibilidade do dia</span>
+      </div>
+    </div>
+    <div class="ondas ondas-saida" aria-hidden="true">
+      <svg class="onda onda-fundo" viewBox="0 0 2880 60" preserveAspectRatio="none"><path fill="currentColor" d="M0 34c60-18 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0V60H0Z"/></svg>
+      <svg class="onda onda-frente" viewBox="0 0 2880 60" preserveAspectRatio="none"><path fill="currentColor" d="M0 34c60-18 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0V60H0Z"/></svg>
+    </div>
+  </section>
+
+  <section id="localizacao" aria-labelledby="tituloLocal">
+    <div class="wrap">
+      <div class="titulo-sec"><h2 id="tituloLocal">Localização</h2></div>
+      <div class="local">
+        <div class="cartao">
+          <h3>Como chegar</h3>
+          <address>
+            Estrada Bertioga, 1946 – Km 7<br>
+            Balneário Praia do Perequê<br>
+            Guarujá – SP · CEP 11446-000
+          </address>
+          <p class="referencia"><b>Referência:</b> Km 7 da Estrada Bertioga, no Balneário Praia do Perequê.</p>
+          <div class="acoes">
+            <a class="btn-azul" href="https://www.google.com/maps/search/?api=1&amp;query=Restaurante%20O%20Farol%2C%20Estrada%20Bertioga%2C%201946%2C%20Guaruj%C3%A1%20-%20SP%2C%2011446-000" target="_blank" rel="noopener">Abrir no Google Maps</a>
+            <a class="btn-linha" href="https://www.google.com/maps/dir/?api=1&amp;destination=Estrada%20Bertioga%2C%201946%2C%20Guaruj%C3%A1%20-%20SP%2C%2011446-000" target="_blank" rel="noopener">Traçar rota</a>
+            <a class="btn-linha" href="https://waze.com/ul?q=Estrada%20Bertioga%2C%201946%2C%20Guaruj%C3%A1%20-%20SP&amp;navigate=yes" target="_blank" rel="noopener">Ir com o Waze</a>
+            <button type="button" class="btn-texto" id="copiarEndereco">Copiar endereço</button>
+          </div>
+          <p class="aviso-copia" id="avisoEndereco" aria-live="polite"></p>
+        </div>
+        <div class="mapa" role="img" aria-label="Ilustração: Estrada Bertioga à beira-mar, com o restaurante no Km 7">
+          <svg class="mapa-arte" data-par="0.05" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="400" height="300" fill="#264653"/>
+            <path d="M0 210 C80 190 140 230 220 205 S340 180 400 200 V300 H0Z" fill="#2A9D8F"/>
+            <path class="linha-mar lm1" d="M0 230 C70 215 150 250 230 228 S350 205 400 222" fill="none" stroke="#7CC7BD" stroke-width="2"/>
+            <path class="linha-mar lm2" d="M0 250 C70 235 150 270 230 248 S350 225 400 242" fill="none" stroke="#7CC7BD" stroke-width="2"/>
+            <path d="M0 200 C80 180 140 220 220 195 S340 170 400 190 V178 C340 158 300 182 220 183 S80 168 0 188Z" fill="#E9C46A"/>
+            <path d="M-10 120 C90 150 170 90 260 120 S380 150 420 110" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity=".92"/>
+            <path d="M-10 120 C90 150 170 90 260 120 S380 150 420 110" fill="none" stroke="#264653" stroke-width="2" stroke-dasharray="10 10"/>
+            <text x="40" y="168" fill="#E9C46A" font-family="Righteous, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">ESTRADA BERTIOGA</text>
+            <text x="200" y="272" text-anchor="middle" fill="#E9C46A" font-family="Righteous, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">PRAIA DO PEREQUÊ</text>
+            <g transform="translate(258 116)"><g class="pino">
+              <path d="M0 -46 C-16 -46 -26 -34 -26 -21 C-26 -4 0 14 0 14 C0 14 26 -4 26 -21 C26 -34 16 -46 0 -46Z" fill="#E76F51" stroke="#fff" stroke-width="3"/>
+              <circle cx="0" cy="-21" r="9" fill="#264653"/>
+            </g></g>
+          </svg>
+          <div class="placa"><span>Estrada Bertioga</span><b>KM 7</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" aria-labelledby="tituloSobre">
+    <div class="wrap">
+      <div class="titulo-sec"><h2 id="tituloSobre">Sobre o restaurante</h2></div>
+      <div class="sobre-grade">
+        <article class="sobre-bloco">
+          <h3>Proposta gastronômica</h3>
+          <p>Cozinha de frutos do mar: porções, filés de peixe, saladas, guarnições e pratos da casa para dividir, como o Frito Misto, a Caldeirada e a Feijoada de Frutos do Mar.</p>
+        </article>
+        <article class="sobre-bloco">
+          <h3>Diferenciais</h3>
+          <ul class="lista-fatos">
+            <li>Feijoada de Frutos do Mar todos os dias, feita na hora</li>
+            <li>Pratos da casa para 1 até 8 pessoas</li>
+            <li>Meia porção pela maior parte do cardápio, a 60% do valor da inteira</li>
+            <li>Filés grelhados ou empanados, à sua escolha</li>
+          </ul>
+        </article>
+        <article class="sobre-bloco pendente" data-pendente="historia">
+          <h3>Nossa história</h3>
+          <p>Em breve.</p>
+        </article>
+        <article class="sobre-bloco pendente" data-pendente="experiencia">
+          <h3>A experiência</h3>
+          <p>Em breve.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" aria-labelledby="tituloContato">
+    <div class="wrap">
+      <div class="contato">
+        <div class="palma p-contato" data-par="0.06" aria-hidden="true"><div class="balanco b1"></div></div>
+        <img src="logo.jpg" alt="">
+        <div>
+          <h2 id="tituloContato">Reservas e pedidos</h2>
+          <p class="fone">(13) 99129-8527</p>
+          <div class="acoes">
+            <a class="btn-zap" href="https://wa.me/5513991298527?text=Ol%C3%A1%2C%20Restaurante%20O%20Farol!" target="_blank" rel="noopener">Enviar mensagem no WhatsApp</a>
+            <a class="btn-claro" href="tel:+5513991298527">Ligar agora</a>
+          </div>
+        </div>
+      </div>
+      <div class="infos">
+        <div class="info-item">
+          <h3>WhatsApp e telefone</h3>
+          <p class="info-dado">(13) 99129-8527</p>
+          <p class="info-acoes"><a href="https://wa.me/5513991298527" target="_blank" rel="noopener">Abrir conversa</a> · <a href="tel:+5513991298527">Ligar</a></p>
+        </div>
+        <div class="info-item">
+          <h3>Endereço</h3>
+          <p class="info-dado">Estrada Bertioga, 1946 – Km 7<br>Balneário Praia do Perequê, Guarujá – SP<br>CEP 11446-000</p>
+          <p class="info-acoes"><a href="#localizacao">Ver como chegar</a></p>
+        </div>
+        <div class="info-item">
+          <h3>Horário de funcionamento</h3>
+          <p class="info-dado">Terça a domingo<br>das 11h30 às 17h00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <div class="rodape-grade">
+      <div>
+        <p class="rodape-nome">Restaurante O Farol</p>
+        <p>Frutos do mar, porções e filés de peixe no Balneário Praia do Perequê, em Guarujá.</p>
+      </div>
+      <nav aria-label="Rodapé">
+        <h2>Navegação</h2>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#localizacao">Localização</a></li>
+          <li><a href="#sobre">Sobre o restaurante</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Contato</h2>
+        <ul>
+          <li><a href="https://wa.me/5513991298527" target="_blank" rel="noopener">WhatsApp (13) 99129-8527</a></li>
+          <li><a href="tel:+5513991298527">Telefone (13) 99129-8527</a></li>
+        </ul>
+        <h2 class="rodape-sub">Horário</h2>
+        <p>Terça a domingo, das 11h30 às 17h00</p>
+      </div>
+      <div>
+        <h2>Localização</h2>
+        <p>Estrada Bertioga, 1946 – Km 7<br>Balneário Praia do Perequê<br>Guarujá – SP · 11446-000</p>
+        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Restaurante%20O%20Farol%2C%20Estrada%20Bertioga%2C%201946%2C%20Guaruj%C3%A1%20-%20SP%2C%2011446-000" target="_blank" rel="noopener">Abrir no Google Maps</a></p>
+      </div>
+    </div>
+    <p class="direitos">© <span id="ano">2026</span> Restaurante O Farol. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<div class="barra-conta vazia" id="barraConta" aria-hidden="true">
+  <div class="resumo"><span id="barraQtd">0 pratos</span><b id="barraTotal">R$ 0,00</b></div>
+  <button type="button" id="abrirConta" aria-controls="painelConta" aria-haspopup="dialog" tabindex="-1">Ver pedido</button>
+</div>
+
+<div class="fundo-conta" id="fundoConta"></div>
+<aside class="painel" id="painelConta" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="tituloConta">
+  <div class="painel-topo">
+    <div>
+      <h2 id="tituloConta">Seu pedido</h2>
+      <p class="passo" id="passoTxt">Passo 1 de 2 · Itens</p>
+    </div>
+    <button type="button" id="fecharConta">Fechar</button>
+  </div>
+
+  <div class="painel-corpo" id="passoItens">
+    <div class="vazio-msg" id="vazioMsg">
+      <p>Seu pedido está vazio.</p>
+      <p>Escolha a porção no cardápio e toque no preço para adicionar.</p>
+      <button type="button" class="btn-linha" id="irCardapio">Ver o cardápio</button>
+    </div>
+    <table class="tabela" id="tabelaConta" hidden>
+      <caption class="sr-only">Itens do pedido</caption>
+      <thead><tr><th scope="col">Prato</th><th scope="col" class="meio">Qtd</th><th scope="col" class="num">Valor</th><th scope="col"><span class="sr-only">Remover</span></th></tr></thead>
+      <tbody id="corpoTabela"></tbody>
+    </table>
+  </div>
+
+  <div class="painel-corpo" id="passoRevisao" hidden>
+    <h3 class="rev-titulo">Confira antes de enviar</h3>
+    <ul class="rev-lista" id="revLista"></ul>
+    <div class="campos">
+      <label for="nomeCliente">Seu nome <span>(opcional)</span></label>
+      <input id="nomeCliente" type="text" autocomplete="name" maxlength="60">
+      <label for="obsPedido">Observações <span>(opcional)</span></label>
+      <textarea id="obsPedido" rows="3" maxlength="400" placeholder="Ex.: filé grelhado ou empanado, horário de retirada"></textarea>
+    </div>
+    <p class="obs-conta">O WhatsApp do restaurante abre com a mensagem pronta. O pedido só vale depois que o restaurante confirmar pela conversa. Não há pagamento pelo site.</p>
+  </div>
+
+  <div class="totais" id="totais">
+    <div class="linha-t"><span>Quantidade</span><b id="tPratos">0 pratos</b></div>
+    <div class="linha-t"><span>Subtotal</span><span id="tSub">R$ 0,00</span></div>
+    <div class="linha-t"><label for="servico"><input type="checkbox" id="servico"> Serviço (10%)</label><span id="tServ">R$ 0,00</span></div>
+    <div class="linha-t total"><span>Total</span><b id="tTotal">R$ 0,00</b></div>
+
+    <div class="acoes-conta" id="acoesItens" hidden>
+      <button type="button" class="principal" id="irRevisao">Revisar e finalizar</button>
+      <button type="button" id="continuar">Continuar escolhendo</button>
+      <button type="button" class="limpar" id="limparConta">Limpar pedido</button>
+    </div>
+    <div class="acoes-conta" id="acoesRevisao" hidden>
+      <a class="principal" id="enviarZap" href="https://wa.me/5513991298527" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+      <button type="button" id="voltarItens">Voltar e editar</button>
+      <button type="button" id="copiarConta">Copiar pedido</button>
+    </div>
+    <p class="aviso-copia" id="avisoCopia" aria-live="polite"></p>
+    <p class="obs-conta">Valores calculados pelo cardápio. Itens sob consulta podem variar.</p>
+  </div>
+</aside>
+
+<div class="sr-only" id="anuncio" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const CARDAPIO = [
+  {id:"especialidades", titulo:"Especialidades da Casa", tipo:"tamanhos", destaque:true,
+   nota:"Pratos para dividir, servidos por número de pessoas.",
+   itens:[
+    {nome:"Frito Misto de Frutos do Mar", desc:"Camarão rosa médio, camarão miúdo, lula, isca de pescada, porquinho, manjuba, sardinha, marisco limpo, arroz branco, fritas e mandioca.",
+     tam:[["2/3 pessoas","250,00"],["4/5 pessoas","425,00"],["6/8 pessoas","695,00"]]},
+    {nome:"Caldeirada de Frutos do Mar", desc:"Peixe (a escolher), lula, polvo, camarão miúdo, camarão rosa médio, marisco limpo e na casca, arroz branco e pirão.",
+     tam:[["1 pessoa","120,00"],["2 pessoas","240,00"],["4 pessoas","430,00"]]},
+    {nome:"Feijoada de Frutos do Mar", tag:"Todos os dias, feita na hora", desc:"Feijão branco, camarão rosa médio, lula, polvo, marisco, peixe, leite de coco, azeite de dendê, folha de louro, pimentão verde, arroz branco e farofa.",
+     tam:[["2/3 pessoas","297,00"],["4/5 pessoas","495,00"]]}
+  ]},
+  {id:"files", titulo:"Filé de Peixes", cols:["½ · 1 pessoa","Inteira · 2/3"],
+   nota:"Todos os filés podem ser grelhados ou empanados.",
+   itens:[
+    {nome:"Pescada", desc:"Fritas ou legumes e arroz branco.", p:["84,00","140,00"]},
+    {nome:"Pescada com Camarão", desc:"Molho de camarão miúdo, arroz branco e pirão.", p:["96,00","160,00"]},
+    {nome:"Pescada com Frutos do Mar", desc:"Molho de frutos do mar com camarão miúdo, lula, polvo, marisco limpo e na casca, arroz branco e pirão.", p:["105,00","175,00"]},
+    {nome:"Pescada à Moda", desc:"Filé grelhado com muçarela, arroz à grega, batata sauté e molho de camarão miúdo à parte.", p:["107,40","179,00"]},
+    {nome:"Badejo ou Linguado", desc:"Fritas ou legumes e arroz branco.", p:["114,00","190,00"]},
+    {nome:"Badejo ou Linguado à Provençal", desc:"Molho com alcaparra apurado no vinho branco e salsinha, arroz branco e batata sauté.", p:["117,00","195,00"]},
+    {nome:"Badejo ou Linguado com Camarão", desc:"Molho de camarão miúdo, arroz branco e pirão.", p:["123,00","205,00"]},
+    {nome:"Badejo ou Linguado com Frutos do Mar", desc:"Molho de frutos do mar com camarão miúdo, lula, polvo, marisco limpo e na casca, arroz branco e pirão.", p:["125,40","209,00"]},
+    {nome:"Badejo ou Linguado à Moda", desc:"Filé grelhado com muçarela, arroz à grega, batata sauté e molho de camarão miúdo à parte.", p:["119,40","199,00"]},
+    {nome:"Salmão à Tropical", desc:"Filé de salmão grelhado com molho de maracujá, arroz branco e batatas douradas.", p:["132,00","220,00"]}
+  ]},
+  {id:"porcoes", titulo:"Porções", cols:["½ porção","Inteira"],
+   itens:[
+    {nome:"Casquinha de Siri", obs:"unidade", p:[null,"39,00"]},
+    {nome:"Ostras de Santa Catarina", obs:"12 unidades", tag:"Sob consulta", p:[null,"85,00"]},
+    {nome:"Camarão Rosa Médio", p:["121,20","202,00"]},
+    {nome:"Camarão Miúdo", p:["78,00","130,00"]},
+    {nome:"Lula à Dorê", p:["96,00","160,00"]},
+    {nome:"Polvo à Vinagrete", p:["105,00","175,00"]},
+    {nome:"Manjuba", p:["42,60","71,00"]},
+    {nome:"Isca de Pescada", p:["72,00","120,00"]},
+    {nome:"Isca de Badejo ou Linguado", p:["87,00","145,00"]},
+    {nome:"Sardinha à Dorê", p:["45,00","75,00"]},
+    {nome:"Caranguejo", obs:"por unidade", tag:"Sob consulta", p:["60,00","100,00"]},
+    {nome:"Fritas ou Mandioca", p:["54,00","90,00"]},
+    {nome:"Frango à Passarinho", p:["42,00","70,00"]},
+    {nome:"Marisco na Casca ao Molho", p:["54,60","91,00"]},
+    {nome:"Marisco Limpo à Vinagrete", p:["57,60","96,00"]},
+    {nome:"Lambe-lambe", p:["57,00","95,00"]},
+    {nome:"Bolinho de Bacalhau", p:["51,00","85,00"]}
+  ]},
+  {id:"guarnicoes", titulo:"Guarnições", cols:["½ porção","Inteira"],
+   itens:[
+    {nome:"Arroz Branco", p:["16,80","28,00"]},
+    {nome:"Arroz à Grega", p:["18,30","30,00"]},
+    {nome:"Feijão", p:["13,20","22,00"]},
+    {nome:"Pirão", p:["12,00","20,00"]},
+    {nome:"Purê", p:["12,00","20,00"]},
+    {nome:"Legumes", p:["18,00","30,00"]},
+    {nome:"Farofa de Dendê com Bacon", p:["12,00","20,00"]},
+    {nome:"Vinagrete", p:["23,40","39,00"]},
+    {nome:"Molho de Camarão", p:["24,00","40,00"]},
+    {nome:"Molho de Frutos do Mar", p:["30,00","50,00"]}
+  ]},
+  {id:"saladas", titulo:"Saladas", cols:["½ porção","Inteira"],
+   itens:[
+    {nome:"Salada Mista", desc:"Hortaliças, tomate, milho, ervilha, cenoura, ovo, pepininho, palmito, azeitona verde e preta.", p:["72,00","120,00"]},
+    {nome:"Salada à Moda do Chef", desc:"Hortaliças, tomate seco, lascas de parmesão, palmito pupunha e azeitona.", p:["81,00","135,00"]},
+    {nome:"Salada de Palmito Pupunha", desc:"Espaguete de palmito pupunha, ervas, azeite e tomate cereja.", p:["84,00","140,00"]}
+  ]}
+];
+
+
+/* ================= Utilidades ================= */
+const $ = id => document.getElementById(id);
+const raiz = document.documentElement;
+const reduz = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = v => parseFloat(String(v).replace(/\./g,"").replace(",", "."));
+const brl = n => n.toLocaleString("pt-BR", {style:"currency", currency:"BRL"});
+const plural = n => n === 1 ? "1 prato" : `${n} pratos`;
+const normaliza = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+const ZAP = "5513991298527";
+const anuncia = txt => { const a = $("anuncio"); a.textContent = ""; setTimeout(() => a.textContent = txt, 30); };
+
+/* ================= Cardápio ================= */
+const PRODUTOS = {};                                   // chave -> {nome, variante, preco}
+const VARIANTES = {files:["½ porção · 1 pessoa","Inteira · 2/3 pessoas"]};
+const nomeHTML = it => `<span class="nome">${esc(it.nome)}${it.obs?` <em>(${esc(it.obs)})</em>`:""}${it.tag?` <span class="tag">${esc(it.tag)}</span>`:""}</span>`;
+
+function opcaoHTML(k, it, variante, valor, classe, card){
+  PRODUTOS[k] = {nome: it.nome, variante, preco: num(valor)};
+  const n = esc(it.nome), v = esc(variante);
+  return `<div class="opcao ${classe}${card ? " op-card" : ""}" data-k="${k}">
+    <span class="op-rotulo">${v}</span>
+    ${card ? `<b class="op-valor">R$ ${valor}</b>` : ""}
+    <button type="button" class="op-add" data-add="${k}" aria-label="Adicionar ${n}, ${v}, R$ ${valor}">${card ? "Adicionar" : `<small>R$</small>${valor}`}</button>
+    <div class="op-qtd" role="group" aria-label="${n}, ${v}">
+      <span class="op-preco">R$ ${valor}</span>
+      <div class="stepper">
+        <button type="button" data-menos="${k}" aria-label="Diminuir ${n}, ${v}">−</button>
+        <output data-out="${k}">0</output>
+        <button type="button" data-mais="${k}" aria-label="Aumentar ${n}, ${v}">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderCardapio(){
+  $("chips").innerHTML = `<button type="button" data-cat="todas" aria-pressed="true">Todas</button>` +
+    CARDAPIO.map(c => `<button type="button" data-cat="${c.id}" aria-pressed="false">${esc(c.titulo)}<span class="n">${c.itens.length}</span></button>`).join("");
+
+  $("folhas").innerHTML = CARDAPIO.map(c => {
+    let corpo;
+    if (c.tipo === "tamanhos") {
+      corpo = c.itens.map((it, i) => `
+        <div class="especial" data-busca="${esc(normaliza([it.nome, it.desc, it.tag].join(" ")))}">
+          ${nomeHTML(it)}
+          <p class="desc">${esc(it.desc)}</p>
+          <div class="tamanhos">${it.tam.map(([q, v], j) => opcaoHTML(`${c.id}-${i}-${j}`, it, q, v, "", true)).join("")}</div>
+        </div>`).join("");
+    } else {
+      const vars = VARIANTES[c.id] || ["½ porção", "Inteira"];
+      corpo = `<div class="cab" aria-hidden="true"><span style="text-align:left">Prato</span><span>${c.cols[0]}</span><span>${c.cols[1]}</span></div>` +
+        c.itens.map((it, i) => {
+          const cel = j => {
+            const v = it.p[j];
+            if (!v) return `<span class="opcao vazio o${j+1}" aria-hidden="true">—</span>`;
+            const variante = (!it.p[0] && it.obs) ? it.obs.charAt(0).toUpperCase() + it.obs.slice(1) : vars[j];
+            return opcaoHTML(`${c.id}-${i}-${j}`, it, variante, v, `o${j+1}`, false);
+          };
+          return `
+        <div class="item" data-busca="${esc(normaliza([it.nome, it.desc, it.obs, it.tag].join(" ")))}">
+          ${nomeHTML(it)}${cel(0)}${cel(1)}
+          ${it.desc ? `<p class="desc">${esc(it.desc)}</p>` : ""}
+        </div>`;
+        }).join("");
+    }
+    return `<article class="folha${c.destaque ? " destaque" : ""}" id="${c.id}" data-cat="${c.id}" aria-labelledby="t-${c.id}">
+      <h3 id="t-${c.id}">${esc(c.titulo)}</h3>${c.nota ? `<p class="nota-cat">${esc(c.nota)}</p>` : ""}${corpo}</article>`;
+  }).join("");
+}
+
+/* Busca e filtros */
+const filtro = {cat: "todas", termo: ""};
+function aplicaFiltro(){
+  const termo = normaliza(filtro.termo);
+  const partes = termo ? termo.split(/\s+/) : [];
+  let total = 0;
+  document.querySelectorAll("#folhas .folha").forEach(f => {
+    const naCat = filtro.cat === "todas" || f.dataset.cat === filtro.cat;
+    let vis = 0;
+    f.querySelectorAll(".item, .especial").forEach(el => {
+      const ok = naCat && partes.every(p => el.dataset.busca.includes(p));
+      el.hidden = !ok; if (ok) vis++;
+    });
+    const cab = f.querySelector(".cab"); if (cab) cab.hidden = !vis;
+    f.hidden = !vis; total += vis;
+  });
+  const filtrando = filtro.cat !== "todas" || termo;
+  if (filtrando) document.querySelectorAll("#folhas .revelar, #folhas .revelar-suave").forEach(el => el.classList.add("visivel"));
+  const cat = CARDAPIO.find(c => c.id === filtro.cat);
+  $("resultado").textContent = !filtrando ? "" :
+    `${plural(total)}${cat ? ` em ${cat.titulo}` : ""}${termo ? ` para “${filtro.termo.trim()}”` : ""}`;
+  $("semResultado").hidden = total > 0;
+  $("semResultadoTermo").textContent = termo ? ` para “${filtro.termo.trim()}”` : "";
+  $("limparBusca").hidden = !filtro.termo;
+  document.querySelectorAll("#chips button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === filtro.cat)));
+}
+function alturaTopoVisivel(){
+  return raiz.classList.contains("cena-ativa") && !raiz.classList.contains("cena-subindo") ? 0 : $("topo").querySelector(".wrap").offsetHeight + 4;
+}
+function rolaParaLista(){
+  const ferr = $("ferramentas"), r = $("folhas").getBoundingClientRect();
+  const limite = alturaTopoVisivel() + ferr.offsetHeight;
+  if (r.top < limite || r.top > innerHeight * 0.7) {
+    scrollTo({top: r.top + scrollY - limite - 8, behavior: reduz ? "auto" : "smooth"});
+  }
+}
+function centralizaChip(btn){
+  const ch = $("chips");
+  ch.scrollTo({left: btn.offsetLeft - ch.clientWidth / 2 + btn.offsetWidth / 2, behavior: reduz ? "auto" : "smooth"});
+}
+
+/* ================= Pedido ================= */
+let conta = {itens: [], servico: false};
+let passo = "itens";
+const CHAVE = "ofarol-conta";
+function carrega(d){
+  if (d && Array.isArray(d.itens)) conta = {itens: d.itens.filter(x => PRODUTOS[x.k] && x.q > 0).map(x => ({k: x.k, q: Math.min(99, Math.floor(x.q))})), servico: !!d.servico};
+}
+function salva(){ try { localStorage.setItem(CHAVE, JSON.stringify(conta)); } catch(e){} }
+const linhaDe = k => conta.itens.find(x => x.k === k);
+
+function adiciona(k){
+  const l = linhaDe(k);
+  if (l) l.q = Math.min(99, l.q + 1); else conta.itens.push({k, q: 1});
+  atualiza();
+  const p = PRODUTOS[k];
+  anuncia(`${p.nome}, ${p.variante}: ${linhaDe(k).q} no pedido.`);
+  [$("barraConta"), $("btnPedido")].forEach(el => { el.classList.remove("pulou"); void el.offsetWidth; el.classList.add("pulou"); });
+}
+function muda(k, d){
+  const l = linhaDe(k); if (!l) { if (d > 0) adiciona(k); return; }
+  l.q = Math.min(99, l.q + d);
+  const p = PRODUTOS[k];
+  if (l.q <= 0) { conta.itens = conta.itens.filter(x => x.k !== k); anuncia(`${p.nome}, ${p.variante}: removido do pedido.`); }
+  else anuncia(`${p.nome}, ${p.variante}: ${l.q} no pedido.`);
+  atualiza();
+}
+function remove(k){
+  const p = PRODUTOS[k];
+  conta.itens = conta.itens.filter(x => x.k !== k);
+  anuncia(`${p.nome}, ${p.variante}: removido do pedido.`);
+  atualiza();
+}
+function calcula(){
+  const pratos = conta.itens.reduce((s, x) => s + x.q, 0);
+  const subtotal = Math.round(conta.itens.reduce((s, x) => s + x.q * PRODUTOS[x.k].preco, 0) * 100) / 100;
+  const servico = conta.servico ? Math.round(subtotal * 10) / 100 : 0;
+  return {pratos, subtotal, servico, total: Math.round((subtotal + servico) * 100) / 100};
+}
+
+function atualiza(){
+  const t = calcula(), vazio = t.pratos === 0;
+  if (vazio && passo === "revisao") definePasso("itens", false);
+
+  // Controles do cardápio
+  document.querySelectorAll("#folhas .opcao[data-k]").forEach(o => {
+    const l = linhaDe(o.dataset.k);
+    o.classList.toggle("tem", !!l);
+    const out = o.querySelector("output"); if (out) out.textContent = l ? l.q : 0;
+  });
+
+  // Cabeçalho e barra
+  $("contadorTopo").textContent = t.pratos;
+  $("contadorTopoSr").textContent = vazio ? ", vazio" : `, ${plural(t.pratos)}, ${brl(t.total)}`;
+  $("btnPedido").classList.toggle("tem", !vazio);
+  $("totalTopo").hidden = vazio; $("totalTopo").textContent = brl(t.total);
+  const barra = $("barraConta");
+  barra.classList.toggle("vazia", vazio);
+  barra.setAttribute("aria-hidden", String(vazio));
+  $("abrirConta").tabIndex = vazio ? -1 : 0;
+  document.body.classList.toggle("tem-pedido", !vazio);
+  $("barraQtd").textContent = plural(t.pratos);
+  $("barraTotal").textContent = brl(t.total);
+
+  // Passo 1: tabela editável
+  $("corpoTabela").innerHTML = conta.itens.map(x => {
+    const p = PRODUTOS[x.k], n = esc(p.nome), v = esc(p.variante);
+    return `<tr>
+      <td><span class="p-nome">${n}</span><span class="p-var">${v} · ${brl(p.preco)}</span></td>
+      <td class="meio"><span class="qtd" role="group" aria-label="Quantidade de ${n}, ${v}">
+        <button type="button" data-menos="${x.k}" aria-label="Diminuir ${n}, ${v}">−</button>
+        <output>${x.q}</output>
+        <button type="button" data-mais="${x.k}" aria-label="Aumentar ${n}, ${v}">+</button>
+      </span></td>
+      <td class="num">${brl(x.q * p.preco)}</td>
+      <td class="acao"><button type="button" class="remover" data-remover="${x.k}" aria-label="Remover ${n}, ${v}">×</button></td>
+    </tr>`;
+  }).join("");
+  $("tabelaConta").hidden = vazio;
+  $("vazioMsg").hidden = !vazio;
+
+  // Passo 2: revisão
+  $("revLista").innerHTML = conta.itens.map(x => {
+    const p = PRODUTOS[x.k];
+    return `<li><span class="q">${x.q}×</span><span class="n">${esc(p.nome)}<small>${esc(p.variante)} · ${brl(p.preco)} cada</small></span><span class="v">${brl(x.q * p.preco)}</span></li>`;
+  }).join("");
+
+  // Totais
+  $("tPratos").textContent = plural(t.pratos);
+  $("tSub").textContent = brl(t.subtotal);
+  $("tServ").textContent = brl(t.servico);
+  $("tTotal").textContent = brl(t.total);
+  $("servico").checked = conta.servico;
+  $("acoesItens").hidden = vazio || passo !== "itens";
+  $("acoesRevisao").hidden = vazio || passo !== "revisao";
+  atualizaZap();
+  salva();
+}
+
+function textoPedido(){
+  const t = calcula();
+  const nome = $("nomeCliente").value.trim(), obs = $("obsPedido").value.trim();
+  const L = ["*Pedido – Restaurante O Farol*", ""];
+  if (nome) L.push(`*Nome:* ${nome}`, "");
+  L.push("*Itens*");
+  conta.itens.forEach(x => {
+    const p = PRODUTOS[x.k];
+    L.push(`• ${x.q}x ${p.nome} (${p.variante}) – ${x.q > 1 ? `${brl(p.preco)} cada = ` : ""}${brl(x.q * p.preco)}`);
+  });
+  L.push("", `Quantidade: ${plural(t.pratos)}`, `Subtotal: ${brl(t.subtotal)}`);
+  if (conta.servico) L.push(`Serviço (10%): ${brl(t.servico)}`);
+  L.push(`*Total: ${brl(t.total)}*`);
+  if (obs) L.push("", `*Observações:* ${obs}`);
+  L.push("", "Aguardo a confirmação do pedido. Obrigado!");
+  return L.join("\n");
+}
+function atualizaZap(){ $("enviarZap").href = `https://wa.me/${ZAP}?text=` + encodeURIComponent(textoPedido()); }
+
+/* Painel */
+let quemAbriu = null;
+function definePasso(p, foca = true){
+  passo = p;
+  $("passoItens").hidden = p !== "itens";
+  $("passoRevisao").hidden = p !== "revisao";
+  $("passoTxt").textContent = p === "itens" ? "Passo 1 de 2 · Itens" : "Passo 2 de 2 · Revisão";
+  const vazio = calcula().pratos === 0;
+  $("acoesItens").hidden = vazio || p !== "itens";
+  $("acoesRevisao").hidden = vazio || p !== "revisao";
+  $("avisoCopia").textContent = "";
+  if (foca) (p === "revisao" ? $("passoRevisao").querySelector(".rev-titulo") : $("tituloConta")).focus?.();
+  $("passoRevisao").querySelector(".rev-titulo").tabIndex = -1; $("tituloConta").tabIndex = -1;
+  $("passoItens").scrollTop = 0; $("passoRevisao").scrollTop = 0;
+}
+function abre(){
+  fechaMenu();
+  quemAbriu = document.activeElement;
+  definePasso("itens", false);
+  $("fundoConta").classList.add("aberta");
+  const pn = $("painelConta"); pn.classList.add("aberta"); pn.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => $("fecharConta").focus(), 60);
+}
+function fecha(){
+  $("fundoConta").classList.remove("aberta");
+  const pn = $("painelConta"); pn.classList.remove("aberta"); pn.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (quemAbriu && document.contains(quemAbriu) && quemAbriu.offsetParent !== null) quemAbriu.focus(); else $("btnPedido").focus();
+}
+const painelAberto = () => $("painelConta").classList.contains("aberta");
+
+/* Menu mobile */
+function abreMenu(){ $("menuMobile").hidden = false; $("btnMenu").setAttribute("aria-expanded", "true"); $("btnMenu").querySelector(".sr-only").textContent = "Fechar menu"; }
+function fechaMenu(){ if ($("menuMobile").hidden) return; $("menuMobile").hidden = true; $("btnMenu").setAttribute("aria-expanded", "false"); $("btnMenu").querySelector(".sr-only").textContent = "Abrir menu"; }
+
+/* ================= Eventos ================= */
+function ligaEventos(){
+  document.addEventListener("click", e => {
+    const t = e.target;
+    const add = t.closest("[data-add]");
+    if (add) { const op = add.closest(".opcao"); adiciona(add.dataset.add); op?.querySelector("[data-mais]")?.focus(); return; }
+    const mais = t.closest("[data-mais]");
+    if (mais) { const k = mais.dataset.mais, noPainel = !!mais.closest("#painelConta"); muda(k, 1); if (noPainel) $("corpoTabela").querySelector(`[data-mais="${k}"]`)?.focus(); return; }
+    const menos = t.closest("[data-menos]");
+    if (menos) {
+      const k = menos.dataset.menos, noPainel = !!menos.closest("#painelConta"), op = menos.closest(".opcao");
+      muda(k, -1);
+      if (noPainel) ($("corpoTabela").querySelector(`[data-menos="${k}"]`) || $("tituloConta")).focus();
+      else if (!linhaDe(k)) op?.querySelector("[data-add]")?.focus();
+      return;
+    }
+    const rem = t.closest("[data-remover]");
+    if (rem) { const prox = rem.closest("tr")?.nextElementSibling?.querySelector("[data-remover]")?.dataset.remover; remove(rem.dataset.remover); ((prox && $("corpoTabela").querySelector(`[data-remover="${prox}"]`)) || $("tituloConta")).focus(); return; }
+    const chip = t.closest("#chips button");
+    if (chip) { filtro.cat = chip.dataset.cat; aplicaFiltro(); centralizaChip(chip); rolaParaLista(); return; }
+    // Fecha o menu mobile ao tocar fora ou num link
+    if (!$("menuMobile").hidden && (t.closest("#menuMobile a") || !t.closest("#topo"))) fechaMenu();
+  });
+
+  let espera;
+  $("busca").addEventListener("input", e => { clearTimeout(espera); espera = setTimeout(() => { filtro.termo = e.target.value; aplicaFiltro(); }, 120); });
+  $("busca").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); e.target.blur(); rolaParaLista(); } if (e.key === "Escape" && e.target.value) { e.stopPropagation(); e.target.value = ""; filtro.termo = ""; aplicaFiltro(); } });
+  $("limparBusca").addEventListener("click", () => { $("busca").value = ""; filtro.termo = ""; aplicaFiltro(); $("busca").focus(); });
+  $("limparFiltros").addEventListener("click", () => { $("busca").value = ""; filtro.termo = ""; filtro.cat = "todas"; aplicaFiltro(); centralizaChip($("chips").firstElementChild); rolaParaLista(); });
+
+  $("btnPedido").addEventListener("click", abre);
+  $("abrirConta").addEventListener("click", abre);
+  $("fecharConta").addEventListener("click", fecha);
+  $("fundoConta").addEventListener("click", fecha);
+  $("continuar").addEventListener("click", fecha);
+  $("irCardapio").addEventListener("click", () => { fecha(); location.hash = "cardapio"; document.getElementById("cardapio").scrollIntoView({behavior: reduz ? "auto" : "smooth"}); });
+  $("irRevisao").addEventListener("click", () => definePasso("revisao"));
+  $("voltarItens").addEventListener("click", () => definePasso("itens"));
+  $("servico").addEventListener("change", e => { conta.servico = e.target.checked; atualiza(); });
+  ["nomeCliente", "obsPedido"].forEach(id => $(id).addEventListener("input", atualizaZap));
+
+  let confirmaLimpar;
+  $("limparConta").addEventListener("click", e => {
+    const b = e.currentTarget;
+    if (!b.classList.contains("confirmar")) {
+      b.classList.add("confirmar"); b.textContent = "Toque de novo para limpar";
+      clearTimeout(confirmaLimpar); confirmaLimpar = setTimeout(() => { b.classList.remove("confirmar"); b.textContent = "Limpar pedido"; }, 3500);
+      return;
+    }
+    clearTimeout(confirmaLimpar); b.classList.remove("confirmar"); b.textContent = "Limpar pedido";
+    conta.itens = []; atualiza(); anuncia("Pedido limpo."); $("tituloConta").focus();
+  });
+
+  $("enviarZap").addEventListener("click", () => {
+    atualizaZap();
+    $("avisoCopia").textContent = "Abrimos o WhatsApp com o pedido. Se não abriu, chame no (13) 99129-8527 e use Copiar pedido.";
+  });
+  const copia = async (txt, alvo, ok) => {
+    try { await navigator.clipboard.writeText(txt); $(alvo).textContent = ok; }
+    catch (e) { $(alvo).textContent = "Não deu para copiar neste navegador."; }
+    setTimeout(() => $(alvo).textContent = "", 3000);
+  };
+  $("copiarConta").addEventListener("click", () => copia(textoPedido(), "avisoCopia", "Pedido copiado."));
+  $("copiarEndereco").addEventListener("click", () => copia("Estrada Bertioga, 1946 – Km 7, Balneário Praia do Perequê, Guarujá – SP, 11446-000", "avisoEndereco", "Endereço copiado."));
+
+  $("btnMenu").addEventListener("click", () => $("menuMobile").hidden ? abreMenu() : fechaMenu());
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      if (painelAberto()) { fecha(); return; }
+      if (!$("menuMobile").hidden) { fechaMenu(); $("btnMenu").focus(); }
+    }
+    // Mantém o foco dentro do painel aberto
+    if (e.key === "Tab" && painelAberto()) {
+      const f = [...$("painelConta").querySelectorAll("a[href],button:not([disabled]),input,textarea,[tabindex='0']")].filter(el => el.offsetParent !== null);
+      if (!f.length) return;
+      const primeiro = f[0], ultimo = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+    }
+  });
+
+  // Pedido sincronizado entre abas
+  addEventListener("storage", e => { if (e.key === CHAVE) { try { carrega(JSON.parse(e.newValue || "null")); } catch(_){} atualiza(); } });
+
+  // Altura do cabeçalho e seção ativa no menu
+  const medeTopo = () => raiz.style.setProperty("--topo-h", ($("topo").querySelector(".wrap").offsetHeight + 4) + "px");
+  medeTopo(); addEventListener("resize", () => { medeTopo(); if (innerWidth > 1080) fechaMenu(); }, {passive: true});
+  const secoes = ["inicio", "cardapio", "localizacao", "sobre", "contato"].map(id => $(id));
+  let pedidoNav = false;
+  const marcaNav = () => {
+    pedidoNav = false;
+    const linha = innerHeight * 0.35;
+    let atual = "inicio";
+    secoes.forEach(s => { if (s.getBoundingClientRect().top <= linha) atual = s.id; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) atual = "contato";
+    document.querySelectorAll("[data-sec]").forEach(a => a.dataset.sec === atual ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
+  };
+  addEventListener("scroll", () => { if (!pedidoNav) { pedidoNav = true; requestAnimationFrame(marcaNav); } }, {passive: true});
+  marcaNav();
+  $("ano").textContent = new Date().getFullYear();
+}
+
+/* ================= Cena do farol (vídeo controlado pela rolagem) ================= */
+function iniciaCena(){
+  const cena = $("cena"), video = $("cenaVideo");
+  const simples = () => { cena.classList.add("cena-simples"); video.controls = true; video.preload = "metadata"; if (!video.getAttribute("src")) video.src = "farol.mp4"; };
+  if (reduz || !window.gsap || !window.ScrollTrigger) { simples(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  raiz.classList.add("cena-gsap");
+
+  // Carrega o vídeo inteiro na memória: buscar quadros fica instantâneo
+  fetch("farol.mp4").then(r => r.ok ? r.blob() : Promise.reject()).then(b => { video.src = URL.createObjectURL(b); }).catch(() => { video.src = "farol.mp4"; });
+
+  // Uma busca por vez; a próxima usa sempre a posição mais recente
+  let alvo = 0, buscando = false;
+  const aplica = () => {
+    if (!video.duration) return;
+    const t = Math.max(0, Math.min(alvo, video.duration - 0.04));
+    if (Math.abs(video.currentTime - t) < 0.02) return;
+    buscando = true; video.currentTime = t;
+  };
+  video.addEventListener("seeked", () => { buscando = false; aplica(); });
+  video.addEventListener("loadedmetadata", aplica);
+  const destrava = () => { const p = video.play(); if (p && p.then) p.then(() => { video.pause(); aplica(); }).catch(() => {}); };
+  addEventListener("touchstart", destrava, {passive: true, once: true});
+  addEventListener("pointerdown", destrava, {once: true});
+
+  const prog = {p: 0};
+  const tl = gsap.timeline({
+    defaults: {ease: "none"},
+    scrollTrigger: {
+      trigger: cena, start: "top top",
+      end: () => "+=" + Math.round(innerHeight * (innerWidth < 700 ? 1.9 : 2.3)),
+      pin: true, scrub: 0.7, anticipatePin: 1, invalidateOnRefresh: true,
+      onToggle: self => { raiz.classList.toggle("cena-ativa", self.isActive); if (!self.isActive) raiz.classList.remove("cena-subindo"); },
+      onUpdate: self => raiz.classList.toggle("cena-subindo", self.direction < 0)
+    }
+  });
+  tl.to(prog, {p: 1, duration: 6, onUpdate: () => { if (!video.duration) return; alvo = prog.p * video.duration; if (!buscando) aplica(); }}, 0)
+    .to(".cena-dica", {autoAlpha: 0, duration: 0.6}, 0.15)
+    .to(".cena-branco", {opacity: 1, duration: 1.6, ease: "power2.in"}, 4.4)   // clarão final ocupa a tela toda
+    .to(".cena-petroleo", {opacity: 1, duration: 1.9, ease: "sine.inOut"}, 6.5) // tela branca por um instante, depois vira azul-petróleo
+    .to({}, {duration: 0.8}, 8.4);                                              // o cardápio sobe por cima do azul
+  addEventListener("load", () => ScrollTrigger.refresh());
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+}
+
+/* ================= Início ================= */
+renderCardapio();
+iniciaCena();
+ligaEventos();
+function inicia(dados){
+  if (dados && dados.itens) carrega(dados);
+  else { try { carrega(JSON.parse(localStorage.getItem(CHAVE) || "null")); } catch(e){} }
+  atualiza();
+  aplicaFiltro();
+}
+window.claude?.hot?.snapshot?.(() => conta);
+window.claude?.hot?.ready ? window.claude.hot.ready(inicia) : inicia(window.claude?.hot?.data ?? {});
+
+/* ===== Movimento ===== */
+(function(){
+  const reduz = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Folha de palmeira gerada por código (folíolos ao longo de um talo curvo)
+  function palmaSVG(){
+    const P = t => { const u=1-t; return [u*u*20 + 2*u*t*150 + t*t*370, u*u*380 + 2*u*t*150 + t*t*60]; };
+    const D = t => { const u=1-t; return [2*u*(150-20) + 2*t*(370-150), 2*u*(150-380) + 2*t*(60-150)]; };
+    let d = "M20 380 Q150 150 370 60 L372 66 Q155 160 26 384Z";
+    const n = 22;
+    for (let i = 1; i <= n; i++){
+      const t = i/(n+1), [x,y] = P(t), [dx,dy] = D(t), a = Math.atan2(dy,dx);
+      const L = 40 + 150*Math.sin(Math.PI*Math.min(1,t*1.15))*(1-.35*t), w = L*.11;
+      [-1,1].forEach(lado => {
+        const ang = a + lado*(Math.PI*0.36) + 0.28;           // folíolos caindo levemente
+        const tx = x + Math.cos(ang)*L, ty = y + Math.sin(ang)*L;
+        const mx = (x+tx)/2, my = (y+ty)/2, nx = -Math.sin(ang)*w, ny = Math.cos(ang)*w;
+        d += `M${x.toFixed(1)} ${y.toFixed(1)}Q${(mx+nx).toFixed(1)} ${(my+ny).toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)}Q${(mx-nx*.4).toFixed(1)} ${(my-ny*.4).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}Z`;
+      });
+    }
+    return `<svg viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="${d}"/></svg>`;
+  }
+  const svg = palmaSVG();
+  document.querySelectorAll(".balanco").forEach(b => b.innerHTML = svg);
+
+  if (reduz) return;
+  setTimeout(() => document.getElementById("barraConta").classList.add("entrou"), 2500);
+
+  // Revelar ao rolar (só o que ainda está abaixo da tela; o que já aparece fica visível)
+  if ("IntersectionObserver" in window){
+    const alvos = [];
+    const marca = (el, cls) => {
+      if (el.getBoundingClientRect().top > innerHeight * 0.9){ el.classList.add(cls); alvos.push(el); }
+    };
+    document.querySelectorAll(".titulo-sec, .folha, .rodape-menu, .cartao, .mapa, .contato, .sobre-bloco, .info-item, .rodape-grade").forEach(el => marca(el, "revelar"));
+    document.querySelectorAll(".folha .item, .folha .especial, .folha .cab").forEach(el => marca(el, "revelar-suave"));
+    const io = new IntersectionObserver(ents => {
+      let k = 0;
+      ents.filter(e => e.isIntersecting)
+          .sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top)
+          .forEach(e => {
+            e.target.style.setProperty("--atraso", Math.min(k++ * 0.06, 0.48) + "s");
+            e.target.classList.add("visivel");
+            io.unobserve(e.target);
+          });
+    }, {rootMargin:"0px 0px -6% 0px", threshold:0.08});
+    alvos.forEach(el => io.observe(el));
+    // Pulo por âncora (chips do cardápio): mostra na hora o que estiver na tela
+    addEventListener("hashchange", () => setTimeout(() => alvos.forEach(el => {
+      const r = el.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) el.classList.add("visivel");
+    }), 400));
+  }
+
+  // Parallax discreto, só com transform e um único rAF por quadro
+  const hero = document.querySelector(".hero"), conteudo = document.querySelector(".hero-conteudo");
+  const camadas = [...document.querySelectorAll("[data-par]")].map(el => ({
+    el, v: parseFloat(el.dataset.par), sec: el.closest(".hero, section, .contato") || el.parentElement,
+    escala: el.classList.contains("mapa-arte") ? " scale(1.08)" : ""
+  }));
+  let pedido = false;
+  function quadro(){
+    pedido = false;
+    const vh = innerHeight, y = scrollY;
+    if (hero && y < hero.offsetHeight){
+      conteudo.style.transform = `translate3d(0, ${(y*0.22).toFixed(1)}px, 0)`;
+      conteudo.style.opacity = Math.max(0, 1 - y / hero.offsetHeight * 0.75).toFixed(3);
+    }
+    camadas.forEach(c => {
+      const r = c.sec.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      const desvio = (r.top + r.height/2) - vh/2;
+      c.el.style.transform = `translate3d(0, ${(-desvio * c.v).toFixed(1)}px, 0)${c.escala}`;
+    });
+  }
+  const agenda = () => { if (!pedido){ pedido = true; requestAnimationFrame(quadro); } };
+  addEventListener("scroll", agenda, {passive:true});
+  addEventListener("resize", agenda, {passive:true});
+  quadro();
+})();
+</script>
+</body>
+</html>
