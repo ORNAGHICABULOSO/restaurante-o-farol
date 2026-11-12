@@ -377,38 +377,14 @@ input,textarea{font-family:inherit;font-size:16px}
 .hero-local svg{width:18px;height:18px;flex:none}
 .hero-local:hover{background:rgba(233,196,106,.12);border-color:var(--areia)}
 
-/* Cena do farol */
-.cena{position:relative;height:100vh;height:100svh;padding:0;margin-top:56px;background:linear-gradient(#132B51,#0D2344);overflow:hidden}
-.cena-palco{position:absolute;inset:0}
-.cena-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:transparent}
-@media (max-aspect-ratio:3/2){
-  .cena-video{-webkit-mask-image:linear-gradient(transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(transparent,#000 6%,#000 94%,transparent)}
-}
-.cena-branco{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
-.cena-petroleo{position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(120% 70% at 50% 100%,#2E5361 0%,var(--petroleo) 60%)}
-.cena-dica{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;color:#E8EEF2;font-size:14px;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.5)}
-.cena-dica svg{width:22px;height:22px}
-@media (prefers-reduced-motion:no-preference){.cena-dica svg{animation:boia 2.6s var(--ease-brisa) infinite alternate}}
-html.cena-ativa:not(.cena-subindo) .topo:not(:focus-within){transform:translateY(-100%)}
-html.cena-ativa .barra-conta{opacity:0;visibility:hidden}
-/* Versão simplificada (movimento reduzido ou sem GSAP) */
-.cena.cena-simples{height:auto;background:#0D2344;padding:32px 0 0}
-.cena-simples .cena-palco{position:relative;inset:auto;max-width:960px;margin:0 auto;padding:0 16px}
-.cena-simples .cena-video{position:relative;height:auto;aspect-ratio:864/480;border-radius:12px;-webkit-mask-image:none;mask-image:none}
-.cena-simples .cena-branco,.cena-simples .cena-petroleo,.cena-simples .cena-dica{display:none}
-.cena-simples::after{content:"";display:block;height:140px;background:linear-gradient(#0D2344,var(--petroleo))}
-
-/* Cardápio sobre o azul-petróleo, continuação da luz do farol */
-#cardapio{background:var(--petroleo);color:#fff;padding:64px 0 120px;position:relative;z-index:2}
-.cena{z-index:1}
-/* Com a cena ativa, o cardápio sobe por cima do fim da transição, já no mesmo azul-petróleo */
-html.cena-gsap #cardapio{margin-top:-50vh;margin-top:-50svh;padding-top:120px;background:linear-gradient(rgba(38,70,83,0),var(--petroleo) 160px)}
+/* Cardápio sobre o azul-petróleo */
+#cardapio{background:var(--petroleo);color:#fff;padding:110px 0 120px;margin-top:64px;position:relative;z-index:2}
+.ondas-entrada{top:-1px;bottom:auto;transform:scaleY(-1)}
 #cardapio .titulo-sec h2{color:var(--areia)}
 #cardapio .titulo-sec p{color:#D5E2E2}
 .p-menu-1{color:var(--verde);opacity:.10}
 .ondas-saida{color:var(--areia)}
 .ferramentas{position:sticky;top:var(--topo-h);z-index:10;display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:12px;align-items:center;padding:12px 0;background:var(--petroleo);transition:top .5s cubic-bezier(.16,1,.3,1)}
-html.cena-ativa:not(.cena-subindo) .ferramentas{top:0}
 .busca{position:relative;display:flex;align-items:center}
 .busca svg{position:absolute;left:14px;width:20px;height:20px;color:var(--tinta-suave);pointer-events:none}
 .busca input{width:100%;height:46px;border-radius:999px;border:2px solid transparent;background:#fff;color:var(--petroleo);padding:0 44px 0 42px;outline:none;transition:border-color .3s ease,box-shadow .3s ease}
@@ -663,16 +639,12 @@ body.tem-pedido .rodape{padding-bottom:110px}
     </div>
   </div>
 
-  <section class="cena" id="cena" aria-label="Vídeo do farol. Role a página para acompanhar a luz.">
-    <div class="cena-palco">
-      <video class="cena-video" id="cenaVideo" muted playsinline preload="auto" disablepictureinpicture aria-label="Farol à noite girando o feixe de luz em direção à câmera"></video>
-      <div class="cena-branco" aria-hidden="true"></div>
-      <div class="cena-petroleo" aria-hidden="true"></div>
-      <p class="cena-dica" aria-hidden="true"><span>Role para seguir a luz</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></p>
-    </div>
-  </section>
 
   <section id="cardapio" aria-labelledby="tituloCardapio">
+    <div class="ondas ondas-entrada" aria-hidden="true">
+      <svg class="onda onda-fundo" viewBox="0 0 2880 60" preserveAspectRatio="none"><path fill="currentColor" d="M0 34c60-18 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0V60H0Z"/></svg>
+      <svg class="onda onda-frente" viewBox="0 0 2880 60" preserveAspectRatio="none"><path fill="currentColor" d="M0 34c60-18 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0 120-18 180 0s120 18 180 0V60H0Z"/></svg>
+    </div>
     <div class="decor-camada" aria-hidden="true">
       <div class="palma p-menu-1" data-par="0.12"><div class="balanco b3"></div></div>
       <div class="palma p-menu-2" data-par="-0.08"><div class="balanco b2"></div></div>
@@ -912,8 +884,6 @@ body.tem-pedido .rodape{padding-bottom:110px}
 
 <div class="sr-only" id="anuncio" aria-live="polite"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 const CARDAPIO = [
   {id:"especialidades", titulo:"Especialidades da Casa", tipo:"tamanhos", destaque:true,
@@ -1078,9 +1048,7 @@ function aplicaFiltro(){
   $("limparBusca").hidden = !filtro.termo;
   document.querySelectorAll("#chips button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === filtro.cat)));
 }
-function alturaTopoVisivel(){
-  return raiz.classList.contains("cena-ativa") && !raiz.classList.contains("cena-subindo") ? 0 : $("topo").querySelector(".wrap").offsetHeight + 4;
-}
+function alturaTopoVisivel(){ return $("topo").querySelector(".wrap").offsetHeight + 4; }
 function rolaParaLista(){
   const ferr = $("ferramentas"), r = $("folhas").getBoundingClientRect();
   const limite = alturaTopoVisivel() + ferr.offsetHeight;
@@ -1349,54 +1317,8 @@ function ligaEventos(){
   $("ano").textContent = new Date().getFullYear();
 }
 
-/* ================= Cena do farol (vídeo controlado pela rolagem) ================= */
-function iniciaCena(){
-  const cena = $("cena"), video = $("cenaVideo");
-  const simples = () => { cena.classList.add("cena-simples"); video.controls = true; video.preload = "metadata"; if (!video.getAttribute("src")) video.src = "farol.mp4"; };
-  if (reduz || !window.gsap || !window.ScrollTrigger) { simples(); return; }
-  gsap.registerPlugin(ScrollTrigger);
-  raiz.classList.add("cena-gsap");
-
-  // Carrega o vídeo inteiro na memória: buscar quadros fica instantâneo
-  fetch("farol.mp4").then(r => r.ok ? r.blob() : Promise.reject()).then(b => { video.src = URL.createObjectURL(b); }).catch(() => { video.src = "farol.mp4"; });
-
-  // Uma busca por vez; a próxima usa sempre a posição mais recente
-  let alvo = 0, buscando = false;
-  const aplica = () => {
-    if (!video.duration) return;
-    const t = Math.max(0, Math.min(alvo, video.duration - 0.04));
-    if (Math.abs(video.currentTime - t) < 0.02) return;
-    buscando = true; video.currentTime = t;
-  };
-  video.addEventListener("seeked", () => { buscando = false; aplica(); });
-  video.addEventListener("loadedmetadata", aplica);
-  const destrava = () => { const p = video.play(); if (p && p.then) p.then(() => { video.pause(); aplica(); }).catch(() => {}); };
-  addEventListener("touchstart", destrava, {passive: true, once: true});
-  addEventListener("pointerdown", destrava, {once: true});
-
-  const prog = {p: 0};
-  const tl = gsap.timeline({
-    defaults: {ease: "none"},
-    scrollTrigger: {
-      trigger: cena, start: "top top",
-      end: () => "+=" + Math.round(innerHeight * (innerWidth < 700 ? 1.9 : 2.3)),
-      pin: true, scrub: 0.7, anticipatePin: 1, invalidateOnRefresh: true,
-      onToggle: self => { raiz.classList.toggle("cena-ativa", self.isActive); if (!self.isActive) raiz.classList.remove("cena-subindo"); },
-      onUpdate: self => raiz.classList.toggle("cena-subindo", self.direction < 0)
-    }
-  });
-  tl.to(prog, {p: 1, duration: 6, onUpdate: () => { if (!video.duration) return; alvo = prog.p * video.duration; if (!buscando) aplica(); }}, 0)
-    .to(".cena-dica", {autoAlpha: 0, duration: 0.6}, 0.15)
-    .to(".cena-branco", {opacity: 1, duration: 1.6, ease: "power2.in"}, 4.4)   // clarão final ocupa a tela toda
-    .to(".cena-petroleo", {opacity: 1, duration: 1.9, ease: "sine.inOut"}, 6.5) // tela branca por um instante, depois vira azul-petróleo
-    .to({}, {duration: 0.8}, 8.4);                                              // o cardápio sobe por cima do azul
-  addEventListener("load", () => ScrollTrigger.refresh());
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
-}
-
 /* ================= Início ================= */
 renderCardapio();
-iniciaCena();
 ligaEventos();
 function inicia(dados){
   if (dados && dados.itens) carrega(dados);
